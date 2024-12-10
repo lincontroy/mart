@@ -49,7 +49,7 @@
                                     <tbody>
 
                                     <?php
-                                    $affs=User::where("ref_by",Auth::user()->id)->get();
+                                    $affs=App\Models\User::where("ref_by",Auth::user()->id)->get();
                                     ?>
                                     @foreach($affs as $aff)
                                     <tr>
