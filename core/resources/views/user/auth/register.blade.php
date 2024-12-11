@@ -105,9 +105,7 @@
                                                         <div class="form-group mb-20">
                                                             <label for="mobile">Mobile</label>
                                                             <input type="tel" class="form-control" id="mobile"
-                                                                placeholder="+2547" name="mobile"
-                                                                pattern="^(\+254)[0-9]{9}$"
-                                                                title="Mobile number must start with +254 followed by 9 digits">
+                                                            placeholder="0724555676" maxlength="10" pattern="[0-9]{10}" required>
                                                         </div>
 
 

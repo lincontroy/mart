@@ -77,7 +77,8 @@
                     <div class="mb-3">
                         <label for="phoneNumber" class="form-label">Phone Number</label>
                         <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber"
-                            placeholder="Enter your phone number" required>
+                        placeholder="0724555676" maxlength="10" pattern="[0-9]{10}" required>
+
                     </div>
 
                     <!-- Amount Input -->

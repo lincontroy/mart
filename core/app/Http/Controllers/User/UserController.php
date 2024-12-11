@@ -1,15 +1,14 @@
 <?php
-
 namespace App\Http\Controllers\User;
-
 use App\Constants\Status;
 use App\Http\Controllers\Controller;
 use App\Lib\FormProcessor;
 use App\Lib\GoogleAuthenticator;
 use App\Lib\Mlm;
 use App\Models\BvLog;
-use App\Models\Ads;
 use App\Models\Deposit;
+use App\Models\Ads;
+
 use App\Models\Form;
 use App\Models\Transaction;
 use App\Models\User;
@@ -17,15 +16,91 @@ use App\Models\UserExtra;
 use App\Models\Withdrawal;
 use Illuminate\Http\Request;
 
+
+
 class UserController extends Controller
 {
 
+    public function response(Request $request){
+        // Decode the JSON response into an associative array
+    $responseData = json_decode($jsonResponse, true);
+
+    // Check if the 'response' key exists
+    if (isset($responseData['response'])) {
+        $response = $responseData['response'];
+
+        // Extract individual data from the 'response'
+        $amount = $response['Amount'] ?? null;
+        $checkoutRequestID = $response['CheckoutRequestID'] ?? null;
+        $externalReference = $response['ExternalReference'] ?? null;
+        $merchantRequestID = $response['MerchantRequestID'] ?? null;
+        $mpesaReceiptNumber = $response['MpesaReceiptNumber'] ?? null;
+        $phone = $response['Phone'] ?? null;
+        $resultCode = $response['ResultCode'] ?? null;
+        $resultDesc = $response['ResultDesc'] ?? null;
+        $status = $response['Status'] ?? null;
+
+        $user=User::where('phone',$phone)->first();
+
+        $user->balance=$user->balance+$amount;
+
+        $user->save();
+
+        $deposit=new Deposit();
+
+        $deposit->user_id=$user->id;
+
+        $deposit->amount=$amount;
+
+        //check amount to distinguish the plan
+        if($amount=='1000'){
+            $plan_id=1;
+        }else if($amount=='2500'){
+            $plan_id=2;
+        }else{
+            $plan_id=3;
+        }
+
+        $deposit->plan_id=$plan_id;
+
+        $deposit->amount=$amount;
+
+        $deposit->trx=$mpesaReceiptNumber;
+
+        $deposit->status=1;
 
 
+
+
+
+        
+    } else {
+        return response()->json(['error' => 'Response data not found'], 400);
+    }
+    }
     public function createdeposit(Request $request){
 
-        $phone = $request->phone;
+        $phone = $request->phoneNumber;
         $amount=$request->amount;
+        $username="ykh4g0n5JfB39WUxQ5uY";
+        $password="TCxbyCiKpE1LLAu6YCOh6PvqrYOlyslfEAxAxaBd";
+
+        $payload = [
+            "amount" => floatval($amount),
+            "phone_number" => $phone,
+            "channel_id" => 1195,
+            "provider" => "m-pesa",
+            "external_reference" => "INV-009",
+            "callback_url" => "https://example.com/callback.php"
+        ];
+
+
+        $creds=$username.":".$password;
+
+        $encodedcreds=base64_encode($creds);
+
+        $basicAuth="Basic ".$encodedcreds;
+        // return $basicAuth;
         $curl = curl_init();
         curl_setopt_array($curl, array(
         CURLOPT_URL => 'https://backend.payhero.co.ke/api/v2/payments',
@@ -36,22 +111,36 @@ class UserController extends Controller
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS =>'{
-            "amount": "' . $amount . '",
-            "phone_number": "' . $phone . '",
-            "channel_id": 911, 
-            "provider": "m-pesa", 
-            "external_reference": "INV-009",
-            "callback_url": "https://example.com/callback.php"
-        }',
+        CURLOPT_POSTFIELDS => json_encode($payload), 
         CURLOPT_HTTPHEADER => array(
             'Content-Type: application/json',
-            'Authorization: Basic 3A6anVoWFZrRk5qSVl0MGNMOERGMlR3dlhrQ0VWUWJHNDVVVnNaMEdDSw=='
+            'Authorization: '
+            .$basicAuth.''
         ),
+        
         ));
         $response = curl_exec($curl);
         curl_close($curl);
-        echo $response;
+
+        try {
+            $responseData = json_decode($response, true, 512, JSON_THROW_ON_ERROR);
+            if ($responseData['status'] === 'QUEUED') {
+               
+                session()->flash('success', 'Payment request created');
+            // Redirect back or to another page
+                return redirect()->back();
+            } else {
+                session()->flash('error', 'An error occured!');
+            // Redirect back or to another page
+                return redirect()->back();
+            }
+        } catch (JsonException $e) {
+            echo "Failed to parse JSON response: " . $e->getMessage();
+        }
+        
+        // echo $response;
+
+
     }
     public function ads(){
         return view('user.ads');    

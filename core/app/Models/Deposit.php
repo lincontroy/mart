@@ -11,6 +11,8 @@ class Deposit extends Model
 {
     use Searchable;
 
+    protected $guarded=[];
+
     protected $casts = [
         'detail' => 'object'
     ];
