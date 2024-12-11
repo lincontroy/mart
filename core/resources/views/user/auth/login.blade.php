@@ -15,6 +15,8 @@
 
     <link rel="stylesheet" href="{{ url('style.css') }}">
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+
     <!-- endinject -->
 
     <link rel="icon" type="{{ url('image/png') }}" sizes="16x16"
@@ -37,7 +39,7 @@
                                 class="signUp-topbar d-flex align-items-center justify-content-md-end justify-content-center mt-md-0 mb-md-0 mt-20 mb-1">
                                 <p class="mb-0">
                                     Don't have an account?
-                                    <a href="/register" class="color-primary">
+                                    <a href="{{url('user/register')}}" class="color-primary">
                                         Sign up
                                     </a>
                                 </p>
@@ -136,6 +138,25 @@
     <script src="{{ url('js/plugins.min.js') }}"></script>
 
     <script src="{{ url('js/script.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script>
+    @if (session('success'))
+        toastr.success('{{ session('success') }}');
+    @endif
+
+    @if (session('error'))
+        toastr.error('{{ session('error') }}');
+    @endif
+
+    @if (session('info'))
+        toastr.info('{{ session('info') }}');
+    @endif
+
+    @if (session('warning'))
+        toastr.warning('{{ session('warning') }}');
+    @endif
+</script>
 
     <!-- endinject-->
 </body>

@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ url('css/plugin.min.css') }}">
 
     <link rel="stylesheet" href="{{ url('style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
 
     <!-- endinject -->
 
@@ -34,7 +35,7 @@
                     $ref=request()->ref;
 
                     if($ref==null){
-                        $ref="admin";
+                        $ref="rootuser";
                     }
                     ?>
 
@@ -47,7 +48,7 @@
                                 class="signUp-topbar d-flex align-items-center justify-content-md-end justify-content-center mt-md-0 mb-md-0 mt-20 mb-1">
                                 <p class="mb-0">
                                     Do you have an account?
-                                    <a href="/login" class="color-primary">
+                                    <a href="{{url('user/login')}}" class="color-primary">
                                         Sign in
                                     </a>
                                 </p>
@@ -150,7 +151,7 @@
                                                                     <span class="checkbox-text">Keep me logged in</span>
                                                                 </label>
                                                             </div>
-                                                            <a href="/forget/password">forget password</a>
+                                                           
                                                         </div>
 
                                                         <div
@@ -191,6 +192,24 @@
     <script src="{{ url('js/plugins.min.js') }}"></script>
 
     <script src="{{ url('js/script.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+    @if (session('success'))
+        toastr.success('{{ session('success') }}');
+    @endif
+
+    @if (session('error'))
+        toastr.error('{{ session('error') }}');
+    @endif
+
+    @if (session('info'))
+        toastr.info('{{ session('info') }}');
+    @endif
+
+    @if (session('warning'))
+        toastr.warning('{{ session('warning') }}');
+    @endif
+</script>
 
     <!-- endinject-->
 </body>

@@ -54,7 +54,7 @@ Route::middleware('auth')->name('user.')->group(function () {
                 Route::get('ads_center', 'ads')->name('ads');
                 Route::post('submit_views', 'submitads')->name('submit_views');
 
-
+                Route::post("deposit/create","createdeposit")->name("createdeposit");
                 Route::get('affiliates', 'affiliates')->name('affiliates');
                 Route::post('planpost', 'planpost')->name('planpost');
 

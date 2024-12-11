@@ -20,6 +20,39 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
 
+
+
+    public function createdeposit(Request $request){
+
+        $phone = $request->phone;
+        $amount=$request->amount;
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://backend.payhero.co.ke/api/v2/payments',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS =>'{
+            "amount": "' . $amount . '",
+            "phone_number": "' . $phone . '",
+            "channel_id": 911, 
+            "provider": "m-pesa", 
+            "external_reference": "INV-009",
+            "callback_url": "https://example.com/callback.php"
+        }',
+        CURLOPT_HTTPHEADER => array(
+            'Content-Type: application/json',
+            'Authorization: Basic 3A6anVoWFZrRk5qSVl0MGNMOERGMlR3dlhrQ0VWUWJHNDVVVnNaMEdDSw=='
+        ),
+        ));
+        $response = curl_exec($curl);
+        curl_close($curl);
+        echo $response;
+    }
     public function ads(){
         return view('user.ads');    
     }

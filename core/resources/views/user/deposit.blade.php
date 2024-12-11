@@ -70,8 +70,10 @@
 
             <!-- Modal Body -->
             <div class="modal-body">
-                <form id="depositForm">
+                <form id="depositForm" method="post" action="{{url('user/deposit/create')}}">
                     <!-- Phone Number Input -->
+
+                    @csrf
                     <div class="mb-3">
                         <label for="phoneNumber" class="form-label">Phone Number</label>
                         <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber"
@@ -84,14 +86,16 @@
                         <input type="number" class="form-control" id="amount" name="amount"
                             placeholder="Enter the deposit amount" required>
                     </div>
+
+                    <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Submit Deposit</button>
+            </div>
                 </form>
             </div>
 
             <!-- Modal Footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="submitDeposit">Submit Deposit</button>
-            </div>
+           
         </div>
     </div>
 </div>
