@@ -37,6 +37,12 @@ class UserController extends Controller
             return redirect()->back();
         }
 
+        if($user->username==$username){
+            session()->flash('error', 'Hahah bold move.You cannot transfer to yourself');
+            // Redirect back or to another page
+            return redirect()->back();
+        }
+
         $toUserBalance=$toUser->balance;
 
         if($mybalance>=$amount){
