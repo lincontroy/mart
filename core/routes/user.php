@@ -51,8 +51,12 @@ Route::middleware('auth')->name('user.')->group(function () {
                 Route::get('dashboard', 'home')->name('home');
                 Route::get('packages', 'packages')->name('packages');
                 Route::get('withdrawals', 'withdrawals')->name('withdrawals');
+                Route::post('withdrawals/create', 'withdrawalscreate')->name('withdrawalscreate');
                 Route::get('affiliates', 'affiliates')->name('affiliates');
                 Route::get('ads_center', 'ads')->name('ads');
+                Route::get('forex', 'forex')->name('forex');
+                Route::get('transfer', 'transferr')->name('transferr');
+                Route::post('transfer/create', 'transfercreate')->name('transferr.create');
                 Route::post('submit_views', 'submitads')->name('submit_views');
 
                 Route::post("deposit/create","createdeposit")->name("createdeposit");
@@ -70,7 +74,7 @@ Route::middleware('auth')->name('user.')->group(function () {
                 Route::get('kyc-data', 'kycData')->name('kyc.data');
                 Route::post('kyc-submit', 'kycSubmit')->name('kyc.submit');
 
-                Route::get('/transfer', 'indexTransfer')->name('balance.transfer');
+                // Route::get('/transfer', 'indexTransfer')->name('balance.transfer');
                 Route::post('/transfer', 'balanceTransfer')->name('balance.transfer.post');
                 Route::post('/search-user', 'searchUser')->name('search.user');
 

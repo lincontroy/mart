@@ -45,6 +45,30 @@
                                     </thead>
                                     <tbody>
 
+                                    <?php
+                                    $withdrawals=App\Models\Withdrawal::where("user_id",Auth::user()->id)->orderBy("id","desc")->get();
+                                    ?>
+
+                                    @foreach($withdrawals as $withdrawal)
+
+                                    <tr>
+
+                                        <td>{{$withdrawal->id}}</td>
+                                        <td>{{$withdrawal->amount}}</td>
+                                        <td>{{$withdrawal->trx}}</td>
+                                        <td>
+                                            @if($withdrawal->status==2)
+                                                <span class="badge badge-warning">Pending</span>
+                                            @elseif($withdrawal->status==1)
+                                                <span class="badge badge-success">Completed</span>
+                                            @elseif($withdrawal->status==3)
+                                                <span class="badge badge-danger">Rejected</span>
+                                            @endif
+                                        </td>
+                                    </tr>
+
+                                    @endforeach
+
 
 
                                     </tbody>
@@ -71,7 +95,9 @@
 
             <!-- Modal Body -->
             <div class="modal-body">
-                <form id="depositForm">
+                <form id="depositForm" method="post" action="{{url('user/withdrawals/create')}}">
+
+                @csrf
                     <!-- Phone Number Input -->
                     <div class="mb-3">
                         <label for="phoneNumber" class="form-label">Phone Number</label>
@@ -83,16 +109,18 @@
                     <div class="mb-3">
                         <label for="amount" class="form-label">Amount</label>
                         <input type="number" class="form-control" id="amount" name="amount"
-                            placeholder="Enter the deposit amount" required>
+                            placeholder="Enter withdrawal amount" required>
                     </div>
+
+                    <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" id="submitDeposit">Submit Withdrawal</button>
+            </div>
                 </form>
             </div>
 
             <!-- Modal Footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="submitDeposit">Submit Deposit</button>
-            </div>
+            
         </div>
     </div>
 </div>

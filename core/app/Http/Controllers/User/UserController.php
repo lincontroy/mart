@@ -8,7 +8,7 @@ use App\Lib\Mlm;
 use App\Models\BvLog;
 use App\Models\Deposit;
 use App\Models\Ads;
-
+use Illuminate\Support\Str;
 use App\Models\Form;
 use App\Models\Transaction;
 use App\Models\User;
@@ -20,6 +20,115 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+
+    public function transfercreate(Request $request){
+        $username=$request->username;
+        $amount=$request->amount;
+
+        $user=auth()->user();
+
+        $mybalance=$user->balance;
+
+        $toUser=User::where('username',$username)->first();
+
+        if(!$toUser){
+            session()->flash('error', 'User not found');
+            // Redirect back or to another page
+            return redirect()->back();
+        }
+
+        $toUserBalance=$toUser->balance;
+
+        if($mybalance>=$amount){
+            $user->balance=$mybalance-$amount;
+            $toUser->balance=$toUserBalance+$amount;
+
+            $user->save();
+            $toUser->save();
+
+            $transaction=new Transaction();
+
+            $transaction->user_id=$user->id;
+
+            $transaction->amount=$amount;
+
+            $transaction->post_balance=$user->balance;
+
+            $transaction->charge=0;
+
+            $transaction->trx_type='-';
+
+            $transaction->remark='balance_transfer';
+
+            $transaction->details='Balance transfer to '.$toUser->username;
+
+            $transaction->trx=Str::random(10);
+
+
+            $transaction->save();
+
+
+
+
+            session()->flash('success', 'Transfer successful');
+            // Redirect back or to another page
+            return redirect()->route('user.home');
+
+    }
+    else{
+        session()->flash('error', 'Insufficient balance to transfer');
+        // Redirect back or to another page
+        return redirect()->back();
+    }
+    }
+
+
+    public function transferr(){
+        return view('user.transfer');
+    }
+
+    public function forex(){
+        return view('user.forex');
+    }
+
+    public function withdrawalscreate(Request $request){
+        $user=auth()->user();
+
+        $balance=$user->balance;
+
+        $amount=$request->amount;
+        $phone=$request->phoneNumber;
+
+        $withdrawal=new Withdrawal();
+
+        $withdrawal->user_id=$user->id;
+
+        $withdrawal->amount=$amount;
+
+        $withdrawal->trx=Str::random(10);
+
+        $withdrawal->phone=$phone;
+
+        $withdrawal->status=2;
+
+        if($balance>=$amount){
+            $user->balance=$balance-$amount;
+            $user->save();
+
+            if($withdrawal->save()){
+                session()->flash('success', 'Withdrawal request created');
+                // Redirect back or to another page
+                return redirect()->back();  
+    
+        }
+        }else{
+                session()->flash('error', 'Insufficient balance to withdraw');
+                // Redirect back or to another page
+                return redirect()->back();  
+        }
+
+        
+}
 
     public function withdrawals(){
 

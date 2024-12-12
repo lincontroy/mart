@@ -495,7 +495,7 @@
                                     <a href="{{ url('user/deposit') }}">Deposits</a>
                                 </li>
                                 <li>
-                                    <a href="{{ url('user/withdraw') }}">Withdrawals</a>
+                                    <a href="{{ url('user/withdrawals') }}">Withdrawals</a>
                                 </li>
 
 
@@ -522,7 +522,7 @@
                         </li>
 
                         <li>
-                            <a href="{{ url('user/packages') }}">
+                            <a href="{{ url('user/forex') }}">
                                 <span data-feather="dollar-sign" class="nav-icon"></span>
                                 <span class="menu-text">Forex center</span>
 
@@ -531,7 +531,7 @@
                         </li>
 
                         <li>
-                            <a href="{{ url('user/funds') }}">
+                            <a href="{{ url('user/transfer') }}">
                                 <span data-feather="dollar-sign" class="nav-icon"></span>
                                 <span class="menu-text">Transfer funds</span>
 

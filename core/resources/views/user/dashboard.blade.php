@@ -400,7 +400,7 @@
                                             @foreach($transactions as $transaction)
                                                 <tr>
                                                     <td>{{ $transaction->id }}</td>
-                                                    <td>{{ $transaction->amount }}</td>
+                                                    <td>Ksh {{ $transaction->amount }}</td>
                                                     <td>{{ $transaction->trx }}</td>
                                                     <td>{{ $transaction->remark }}</td>
                                                     <td>{{ $transaction->created_at }}</td>
