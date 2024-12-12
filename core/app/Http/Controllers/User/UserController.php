@@ -37,7 +37,11 @@ class UserController extends Controller
             return redirect()->back();
         }
 
-        if($user->username==$username){
+        // return $user->username.$username;
+
+        if (strtolower($user->username) == strtolower($username)) {
+
+            
             session()->flash('error', 'Hahah bold move.You cannot transfer to yourself');
             // Redirect back or to another page
             return redirect()->back();
