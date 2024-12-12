@@ -72,6 +72,45 @@
 
 
                         <div class="overview-content">
+                            <h1>    <?php
+                                $total_ads=App\Models\Ads::where('user_id',Auth::user()->id)->sum('earnings');
+                                ?>
+                            Ksh {{ number_format($total_ads, 2) }}</h1>
+                            <p>WhatsApp Earnings</p>
+                            <div class="ap-po-details-time">
+                                <span class="color-success"><i class="las la-arrow-up"></i>
+                                    <strong>35%</strong></span>
+                                <small>Since last week</small>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="ap-po-timeChart">
+                        <div class="overview-single__chart d-md-flex align-items-end">
+                            <div class="parentContainer">
+
+
+                                <div>
+                                    <canvas id="mychart11"></canvas>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 1 End -->
+            </div>
+            <div class="col-xxl-3 col-md-6 col-ssm-12 mb-30">
+                <!-- Card 1 -->
+                <div class="ap-po-details p-25 radius-xl bg-white d-flex justify-content-between">
+                    <div>
+
+
+
+
+
+                        <div class="overview-content">
                             <h1>Ksh {{ number_format(Auth::user()->balance, 2) }}
                             </h1>
                             <p>Deposit balance</p>
@@ -173,42 +212,7 @@
                 </div>
                 <!-- Card 3 End -->
             </div>
-            <div class="col-xxl-3 col-md-6 col-ssm-12 mb-30">
-                <!-- Card 1 -->
-                <div class="ap-po-details p-25 radius-xl bg-white d-flex justify-content-between">
-                    <div>
-
-
-
-
-
-                        <div class="overview-content">
-                            <h1>Ksh 0.00</h1>
-                            <p>WhatsApp Earnings</p>
-                            <div class="ap-po-details-time">
-                                <span class="color-success"><i class="las la-arrow-up"></i>
-                                    <strong>35%</strong></span>
-                                <small>Since last week</small>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="ap-po-timeChart">
-                        <div class="overview-single__chart d-md-flex align-items-end">
-                            <div class="parentContainer">
-
-
-                                <div>
-                                    <canvas id="mychart11"></canvas>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 1 End -->
-            </div>
+            
 
             <div class="col-xxl-3 col-md-6 col-ssm-12 mb-30">
                 <!-- Card 1 -->
@@ -230,9 +234,11 @@
                                 $planname="Basic Package";
                             }else if($package==2){
                                 $planname="Platinum Package";
-                            }else{
+                            }else if($package==3){
 
                                 $planname="Premium Ads Package";
+                            }else{
+                                $planname="No package";
                             }
                             ?>
                                 
