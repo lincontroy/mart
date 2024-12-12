@@ -45,18 +45,26 @@ class RegisterController extends Controller
 
     function registerr(Request $request){
 
+        
+
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:users,email',
-            'username' => 'required|min:3|max:255',
-            'mobile' => 'required|numeric|min:10',
+            'username' => 'required|min:3|max:255|unique:users,username',
+            'mobile' => 'required',
             'referredby' => 'nullable|string',
             'password' => 'required|confirmed|min:6',
         ]);
 
+        
+
          // Check if validation fails
          if ($validator->fails()) {
+
+
             return redirect()->back()->withErrors($validator)->withInput();
         }
+
+        // dd($request);
 
         $ref_by_id=User::where('username',$request->referredby)->first();
 

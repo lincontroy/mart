@@ -105,7 +105,7 @@
                                                         <div class="form-group mb-20">
                                                             <label for="mobile">Mobile</label>
                                                             <input type="tel" class="form-control" id="mobile"
-                                                            placeholder="0724555676" maxlength="10" pattern="[0-9]{10}" required>
+                                                            placeholder="0724555676" maxlength="10" pattern="[0-9]{10}" name="mobile" required>
                                                         </div>
 
 
