@@ -29,33 +29,44 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->configureRateLimiting();
-
+    
         $this->routes(function () {
             Route::namespace($this->namespace)->middleware(VugiChugi::mdNm())->group(function(){
+    
+                // IPN Routes
                 Route::middleware(['web','maintenance'])
                     ->namespace('Gateway')
                     ->prefix('ipn')
                     ->name('ipn.')
                     ->group(base_path('routes/ipn.php'));
-
+    
+                // Admin Routes
                 Route::middleware(['web'])
                     ->namespace('Admin')
                     ->prefix('admin')
                     ->name('admin.')
                     ->group(base_path('routes/admin.php'));
-
+    
+                // User Routes
                 Route::middleware(['web','maintenance'])
                     ->prefix('user')
                     ->group(base_path('routes/user.php'));
-
+    
+                // Web Routes
                 Route::middleware(['web','maintenance'])
                     ->group(base_path('routes/web.php'));
+    
+                // API Routes (add this part)
+                Route::middleware(['api']) // Apply the "api" middleware group
+                    ->prefix('api') // Prefix all routes with "api"
+                    ->group(base_path('routes/api.php')); // Load routes from routes/api.php
             });
-
         });
-
-        Route::get('maintenance-mode','App\Http\Controllers\SiteController@maintenance')->name('maintenance');
+    
+        // Maintenance route
+        Route::get('maintenance-mode', 'App\Http\Controllers\SiteController@maintenance')->name('maintenance');
     }
+    
 
     /**
      * Configure the rate limiters for the application.

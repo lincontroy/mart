@@ -44,6 +44,28 @@
                                     </thead>
                                     <tbody>
 
+                                    <?php
+                                    $deposits=App\Models\Deposit::where("user_id",Auth::user()->id)
+                                    ->orderBy("id","desc")
+                                    ->get();
+                                    ?>
+
+                                    @foreach($deposits as $deposit)
+                                        <tr>
+                                            <td>{{$deposit->id}}</td>
+                                            <td>{{$deposit->amount}}</td>
+                                            <td>{{$deposit->trx}}</td>
+                                            <td>
+                                                @if($deposit->status==0)
+                                                    <span class="badge badge-warning">Pending</span>
+                                                @elseif($deposit->status==1)
+                                                    <span class="badge badge-success">Success</span>
+                                                @else
+                                                    <span class="badge badge-danger">Rejected</span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
 
 
                                     </tbody>
