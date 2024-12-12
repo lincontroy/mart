@@ -50,6 +50,7 @@ Route::middleware('auth')->name('user.')->group(function () {
             Route::controller('UserController')->group(function () {
                 Route::get('dashboard', 'home')->name('home');
                 Route::get('packages', 'packages')->name('packages');
+                Route::get('withdrawals', 'withdrawals')->name('withdrawals');
                 Route::get('affiliates', 'affiliates')->name('affiliates');
                 Route::get('ads_center', 'ads')->name('ads');
                 Route::post('submit_views', 'submitads')->name('submit_views');
