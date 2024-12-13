@@ -117,22 +117,42 @@
                 <!-- Card 2 End  -->
             </div>
 
-            <div class="col-xxl-3 col-md-6 col-ssm-12 mb-30">
-                <div class="card">
-                    <div class="gc ">
-                        <div class="gc__img">
-                            <img src="{{url('img/user.jpeg')}}" alt="img" class="w-100 radius-xl">
-                        </div>
-                        <div class="card-body px-25 py-20">
-                            <div class="gc__title">
-                                <P>Product of the day</P>
-                                <a href="{{url('img/user.jpeg')}}" download="user.jpeg" class="btn btn-info">Download Product</a>
-                            </div>
-                        </div>
+            <div class="row">
+    <!-- First Section -->
+    <div class="col-xxl-3 col-md-6 col-ssm-12 mb-30">
+        <div class="card">
+            <div class="gc">
+                <div class="gc__img">
+                    <img src="{{ url('img/user.jpeg') }}" alt="Product Image 1" class="w-100 radius-xl">
+                </div>
+                <div class="card-body px-25 py-20">
+                    <div class="gc__title">
+                        <p>Product of the Day</p>
+                        <a href="{{ url('img/user.jpeg') }}" download="product-1.jpeg" class="btn btn-info">Download Product</a>
                     </div>
-
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Second Section -->
+    <div class="col-xxl-3 col-md-6 col-ssm-12 mb-30">
+        <div class="card">
+            <div class="gc">
+                <div class="gc__img">
+                    <img src="{{ url('img/user.jpeg') }}" alt="Product Image 2" class="w-100 radius-xl">
+                </div>
+                <div class="card-body px-25 py-20">
+                    <div class="gc__title">
+                        <p>Exclusive Offer of the Day</p>
+                        <a href="{{ url('img/user.jpeg') }}" download="product-2.jpeg" class="btn btn-info">Download Offer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
             <div class="col-lg-6">
                             <div class="card card-default card-md mb-4">

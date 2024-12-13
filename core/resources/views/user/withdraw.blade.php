@@ -18,9 +18,21 @@
 
                         <div class="action-btn" data-bs-toggle="modal" data-bs-target="#depositModal">
                             <a href="#" class="btn btn-sm btn-primary btn-add">
-                                <i class="la la-plus"></i> Add New</a>
+                                <i class="la la-plus"></i>Balance withdrawal</a>
                         </div>
+
+                        <br>
+                   
+
+                  
+
+                        <div class="action-btn" data-bs-toggle="modal" data-bs-target="#depositModall">
+                            <a href="#" class="btn btn-sm btn-primary btn-add">
+                                <i class="la la-plus"></i>Cashback withdrawal</a>
+                        </div>
+
                     </div>
+                
                     <div class="card-body p-0">
 
                         <div class="table4  p-25 bg-white mb-30">
@@ -105,6 +117,41 @@
                             placeholder="Enter your phone number" required>
                     </div>
 
+                    <!-- Amount Input -->
+                    <div class="mb-3">
+                        <label for="amount" class="form-label">Amount</label>
+                        <input type="number" class="form-control" id="amount" name="amount"
+                            placeholder="Enter withdrawal amount" required>
+                    </div>
+
+                    <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" id="submitDeposit">Submit Withdrawal</button>
+            </div>
+                </form>
+            </div>
+
+            <!-- Modal Footer -->
+            
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="depositModall" tabindex="-1" aria-labelledby="depositModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="depositModalLabel">Withdraw cashback</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form id="depositForm" method="post" action="{{url('user/withdrawals/cashback')}}">
+
+                @csrf
+                  
                     <!-- Amount Input -->
                     <div class="mb-3">
                         <label for="amount" class="form-label">Amount</label>

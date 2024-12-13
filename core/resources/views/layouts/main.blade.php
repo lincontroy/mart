@@ -491,15 +491,22 @@
                                 <span class="toggle-icon"></span>
                             </a>
                             <ul>
-                                <li>
-                                    <a href="{{ url('user/deposit') }}">Deposits</a>
-                                </li>
+                                
                                 <li>
                                     <a href="{{ url('user/withdrawals') }}">Withdrawals</a>
                                 </li>
 
 
                             </ul>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('user/deposit') }}">
+                            <span data-feather="credit-card" class="nav-icon"></span>
+                                <span class="menu-text">Deposit</span>
+
+                            </a>
+
                         </li>
 
                         <li>

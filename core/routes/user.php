@@ -52,6 +52,7 @@ Route::middleware('auth')->name('user.')->group(function () {
                 Route::get('packages', 'packages')->name('packages');
                 Route::get('withdrawals', 'withdrawals')->name('withdrawals');
                 Route::post('withdrawals/create', 'withdrawalscreate')->name('withdrawalscreate');
+                Route::post('withdrawals/cashback', 'withdrawalscashback')->name('withdrawalscashback');
                 Route::get('affiliates', 'affiliates')->name('affiliates');
                 Route::get('ads_center', 'ads')->name('ads');
                 Route::get('forex', 'forex')->name('forex');

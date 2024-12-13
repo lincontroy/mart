@@ -21,6 +21,76 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
 
+
+    public function forexpackage(Request $request){
+
+
+        $user=auth()->user();
+
+        $amount=$request->amount;
+
+        $user_balance=$user->balance;
+
+        if($user_balance>=$amount){
+            $user->balance=$user_balance-$amount;
+            
+
+
+            if($user->save()){
+                session()->flash('success', 'Forex package purchased');
+                // Redirect back or to another page
+                return redirect()->back();  
+    
+        }
+        }else{
+                session()->flash('error', 'Insufficient balance to purchase package');
+                // Redirect back or to another page
+                return redirect()->back();  
+        }
+
+
+    }
+
+    public function withdrawalscashback(Request $request){
+        $user=auth()->user();
+
+        $balance=$user->cashback;
+
+        $amount=$request->amount;
+        // $phone=$request->phoneNumber;
+
+        $withdrawal=new Withdrawal();
+
+        $withdrawal->user_id=$user->id;
+
+        $withdrawal->amount=$amount;
+
+        $withdrawal->trx=Str::random(10);
+
+        // $withdrawal->phone=$phone;
+
+        $withdrawal->withdraw_information="cashback";
+
+        $withdrawal->status=2;
+
+        if($balance>=$amount){
+            $user->cashback=$balance-$amount;
+            $user->save();
+
+            if($withdrawal->save()){
+                session()->flash('success', 'Withdrawal request created');
+                // Redirect back or to another page
+                return redirect()->back();  
+    
+        }
+        }else{
+                session()->flash('error', 'Insufficient balance to withdraw');
+                // Redirect back or to another page
+                return redirect()->back();  
+        }
+
+        
+}
     public function transfercreate(Request $request){
         $username=$request->username;
         $amount=$request->amount;
@@ -173,6 +243,12 @@ class UserController extends Controller
         $user=User::where('mobile',$phone)->first();
 
         $user->balance=$user->balance+$amount;
+
+        //add to cashback
+
+        $cashback=$user->cashback;
+
+        $user->cashback=$cashback+($amount*2);
 
         $user->save();
 

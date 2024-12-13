@@ -196,7 +196,7 @@ Ksh {{ number_format($total_ads, 2) }}
 
 
                         <div class="overview-content">
-                            <h1>Ksh 0
+                            <h1>Ksh {{Auth::user()->cashback}}
                             </h1>
                             <p>Cashback</p>
                             <div class="ap-po-details-time">
