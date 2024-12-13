@@ -63,6 +63,7 @@ Route::middleware('auth')->name('user.')->group(function () {
                 Route::post("what","whatswith")->name("what");
                 Route::post("deposit/create","createdeposit")->name("createdeposit");
                 Route::get('affiliates', 'affiliates')->name('affiliates');
+                Route::get('addons', 'addons')->name('addons');
                 Route::post('planpost', 'planpost')->name('planpost');
 
                 //2FA

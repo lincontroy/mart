@@ -23,6 +23,10 @@ use Carbon\Carbon;
 class UserController extends Controller
 {
 
+    public function addons(Request $request){
+        return view ('user.addons');
+    }
+
     public function premium(){
         return view('user.premium');
     }
@@ -530,7 +534,7 @@ class UserController extends Controller
         }else if($plan == 'PREMIUM Membership'){
 
             $plan_id=4; 
-            
+
         }else{
             $plan_id=5;
         }
