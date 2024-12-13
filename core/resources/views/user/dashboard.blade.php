@@ -75,9 +75,9 @@
                         <h1><?php
 
 use Carbon\Carbon;
-$total_ads=App\Models\Ads::where('user_id',Auth::user())
-->whereDate('created_at', Carbon::today())
-->sum('earnings');
+$total_ads=App\Models\Ads::where('user_id',Auth::user()->id)
+                                ->whereBetween('created_at', [Carbon::now()->startOfDay(), Carbon::now()->endOfDay()])
+                                ->sum('earnings');
 
 ?>
 Ksh {{ number_format($total_ads, 2) }}
@@ -119,7 +119,10 @@ Ksh {{ number_format($total_ads, 2) }}
 
                         <div class="overview-content">
                             <h1>    <?php
-                                $total_ads=App\Models\Ads::where('user_id',Auth::user()->id)->sum('earnings');
+                                $whatsapp_with=App\Models\Withdrawal::where('user_id',Auth::user()->id)
+                                ->where('withdraw_information', 'LIKE', '%whatsapp%')
+                               
+                                ->sum('amount');
                                 ?>
                             Ksh {{ number_format($total_ads, 2) }}</h1>
                             <p>Total WhatsApp Withdrawals</p>

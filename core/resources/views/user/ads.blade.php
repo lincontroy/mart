@@ -100,12 +100,20 @@
                             <h1><?php
 
                                 use Carbon\Carbon;
+
                                 $total_ads=App\Models\Ads::where('user_id',Auth::user()->id)
                                 ->whereBetween('created_at', [Carbon::now()->startOfDay(), Carbon::now()->endOfDay()])
                                 ->sum('earnings');
+        
+                                $whatsapp_with=App\Models\Withdrawal::where('user_id',Auth::user()->id)
+                                ->where('withdraw_information', 'LIKE', '%whatsapp%')
+                                ->whereBetween('created_at', [Carbon::now()->startOfDay(), Carbon::now()->endOfDay()])
+                                ->sum('amount');
+                                
+                                $active=$total_ads-$whatsapp_with
                                
                                 ?>
-                            Ksh {{ number_format($total_ads, 2) }}
+                            Ksh {{ number_format($active, 2) }}
                         </h1>
                             <p> Active Balance</p>
                             

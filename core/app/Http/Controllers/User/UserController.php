@@ -16,6 +16,7 @@ use App\Models\UserExtra;
 use App\Models\Withdrawal;
 use Illuminate\Http\Request;
 use Auth;
+use Carbon\Carbon;
 
 
 
@@ -28,21 +29,50 @@ class UserController extends Controller
         $user=Auth::user();
 
         $amount=$request->amount;
+     
 
         //check the amount earned today
-        $total_ads=App\Models\Ads::where('user_id',Auth::user()->id)
+        $total_ads=Ads::where('user_id',Auth::user()->id)
                                 ->whereBetween('created_at', [Carbon::now()->startOfDay(), Carbon::now()->endOfDay()])
                                 ->sum('earnings');
         
-        $whatsapp_with=App\Models\Withdrawal::where('user_id',Auth::user()->id)
-                                ->where('withdraw_information',"whatsapp")
+        $whatsapp_with=Withdrawal::where('user_id',Auth::user()->id)
+                                ->where('withdraw_information', 'LIKE', '%whatsapp%')
                                 ->whereBetween('created_at', [Carbon::now()->startOfDay(), Carbon::now()->endOfDay()])
                                 ->sum('amount');
 
-        //check the balance
+        $wh="whatsapp";
 
-        return;
 
+
+        //check if there is a balance
+
+        if($whatsapp_with<=$total_ads){
+            $withdrawal=new Withdrawal();
+
+            $withdrawal->user_id=$user->id;
+
+            $withdrawal->amount=$amount;
+
+            $withdrawal->trx=Str::random(10);
+
+            $withdrawal->withdraw_information=$wh;
+
+            $withdrawal->status=1;
+
+            if($withdrawal->save()){
+                session()->flash('success', 'Withdrawal request created');
+                // Redirect back or to another page
+                return redirect()->back();  
+        }
+    }else{
+
+        session()->flash('error', 'Insufficient balance to withdraw');  
+        return redirect()->back();
+
+
+       
+    }
 
 
 
@@ -332,8 +362,8 @@ class UserController extends Controller
 
         $phone = $request->phoneNumber;
         $amount=$request->amount;
-        $username="ykh4g0n5JfB39WUxQ5uY";
-        $password="TCxbyCiKpE1LLAu6YCOh6PvqrYOlyslfEAxAxaBd";
+        $username="nGcRuk82L34adNA4Xq1C";
+        $password="6hF7G2ELylHPAM1vuKlJlgeLPsaYtguTyP2niVMx";
 
         $payload = [
             "amount" => floatval($amount),

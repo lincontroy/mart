@@ -51,6 +51,10 @@
                                             </th>
 
                                             <th>
+                                                <span class="userDatatable-title">Remarks</span>
+                                            </th>
+
+                                            <th>
                                                 <span class="userDatatable-title">Status</span>
                                             </th>
                                         </tr>
@@ -68,6 +72,7 @@
                                         <td>{{$withdrawal->id}}</td>
                                         <td>{{$withdrawal->amount}}</td>
                                         <td>{{$withdrawal->trx}}</td>
+                                        <td>{{$withdrawal->withdraw_information}}</td>
                                         <td>
                                             @if($withdrawal->status==2)
                                                 <span class="badge badge-warning">Pending</span>
