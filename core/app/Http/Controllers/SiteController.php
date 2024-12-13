@@ -23,7 +23,7 @@ class SiteController extends Controller
 {
     public function index()
     {
-        return;
+        return redirect()->route('user.home');
         $ref = @$_GET['ref'];
         if ($ref) {
             session()->put('ref', $ref);
