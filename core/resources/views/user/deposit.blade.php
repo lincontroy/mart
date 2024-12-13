@@ -39,7 +39,7 @@
 
 <div class="warning-sign">
     <span class="warning-icon">⚠️</span>
-    <div class="warning-text">All payments are made to the methods provided by the platfrom</div>
+    <div class="warning-text">All payments are made to the methods provided by the . No payment should be made to individual numbers/bank paybills.</div>
 </div>
 <div class="contents">
 

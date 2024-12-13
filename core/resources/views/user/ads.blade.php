@@ -100,8 +100,8 @@
                             <h1><?php
 
                                 use Carbon\Carbon;
-                                $total_ads=App\Models\Ads::where('user_id',Auth::user())
-                                ->whereDate('created_at', Carbon::today())
+                                $total_ads=App\Models\Ads::where('user_id',Auth::user()->id)
+                                ->whereBetween('created_at', [Carbon::now()->startOfDay(), Carbon::now()->endOfDay()])
                                 ->sum('earnings');
                                
                                 ?>
@@ -110,6 +110,10 @@
                             <p> Active Balance</p>
                             
                         </div>
+
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#packageModal">
+                           Withdraw earnings
+                        </button>
 
                     </div>
                     
