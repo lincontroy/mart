@@ -81,25 +81,25 @@
                                                         <div class="form-group mb-20">
                                                             <label for="username">Email Address</label>
                                                             <input type="email" class="form-control" id="username"
-                                                                placeholder="Email Address" name="email">
+                                                                placeholder="Email Address" name="email" required>
                                                         </div>
 
                                                         <div class="form-group mb-20">
                                                             <label for="username">First name</label>
                                                             <input type="text" class="form-control" id="username"
-                                                                placeholder="First name" name="firstname">
+                                                                placeholder="First name" name="firstname" required>
                                                         </div>
 
                                                         <div class="form-group mb-20">
                                                             <label for="username">Last name</label>
                                                             <input type="text" class="form-control" id="username"
-                                                                placeholder="Last name" name="lastname">
+                                                                placeholder="Last name" name="lastname" required>
                                                         </div>
 
                                                         <div class="form-group mb-20">
                                                             <label for="username">Username</label>
                                                             <input type="text" class="form-control" id="username"
-                                                                placeholder="Username" name="username">
+                                                                placeholder="Username" name="username" required>
                                                         </div>
 
                                                         <div class="form-group mb-20">

@@ -332,7 +332,7 @@ Ksh {{ number_format($total_ads, 2) }}
                             }else if($planname==6){
                                 $planname="Agent";
 
-                            }else{
+                            }else if($planname==0){
                                 $planname="No package";
                             }
                             ?>
