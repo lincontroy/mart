@@ -56,6 +56,7 @@ Route::middleware('auth')->name('user.')->group(function () {
                 Route::get('affiliates', 'affiliates')->name('affiliates');
                 Route::get('ads_center', 'ads')->name('ads');
                 Route::get('forex', 'forex')->name('forex');
+                Route::get('premium', 'premium')->name('premium');
                 Route::get('transfer', 'transferr')->name('transferr');
                 Route::post('transfer/create', 'transfercreate')->name('transferr.create');
                 Route::post('submit_views', 'submitads')->name('submit_views');

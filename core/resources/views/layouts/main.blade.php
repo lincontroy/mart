@@ -518,6 +518,24 @@
 
                         </li>
 
+                        <li>
+                            <a href="{{ url('user/premium') }}">
+                                <span data-feather="box" class="nav-icon"></span>
+                                <span class="menu-text">Premium</span>
+
+                            </a>
+
+                        </li>
+
+                        <li>
+                            <a href="{{ url('user/addons') }}">
+                                <span data-feather="box" class="nav-icon"></span>
+                                <span class="menu-text">Addons</span>
+
+                            </a>
+
+                        </li>
+
 
                         <li>
                             <a href="{{ url('user/affiliates') }}">

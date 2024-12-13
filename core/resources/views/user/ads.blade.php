@@ -135,12 +135,12 @@
         <div class="card">
             <div class="gc">
                 <div class="gc__img">
-                    <img src="{{ url('img/user.jpeg') }}" alt="Product Image 1" class="w-100 radius-xl">
+                    <img src="{{ url('img/ad1.png') }}" alt="Product Image 1" class="w-100 radius-xl">
                 </div>
                 <div class="card-body px-25 py-20">
                     <div class="gc__title">
                         <p>Product of the Day</p>
-                        <a href="{{ url('img/user.jpeg') }}" download="product-1.jpeg" class="btn btn-info">Download Product</a>
+                        <a href="{{ url('img/ad2.png') }}" download="ads.png" class="btn btn-info">Download Product</a>
                     </div>
                 </div>
             </div>
@@ -152,12 +152,12 @@
         <div class="card">
             <div class="gc">
                 <div class="gc__img">
-                    <img src="{{ url('img/user.jpeg') }}" alt="Product Image 2" class="w-100 radius-xl">
+                    <img src="{{ url('img/ad2.png') }}" alt="Product Image 2" class="w-100 radius-xl">
                 </div>
                 <div class="card-body px-25 py-20">
                     <div class="gc__title">
                         <p>Exclusive Offer of the Day</p>
-                        <a href="{{ url('img/user.jpeg') }}" download="product-2.jpeg" class="btn btn-info">Download Offer</a>
+                        <a href="{{ url('img/ad2.png') }}" download="ad2.png" class="btn btn-info">Download Offer</a>
                     </div>
                 </div>
             </div>

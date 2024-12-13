@@ -23,6 +23,10 @@ use Carbon\Carbon;
 class UserController extends Controller
 {
 
+    public function premium(){
+        return view('user.premium');
+    }
+
 
     public function whatswith(Request $request){
 
@@ -520,9 +524,15 @@ class UserController extends Controller
         }else if( $plan == 'PLATINUM Package'){
            
             $plan_id=2;
-        }else{
+        }else if($plan == 'PREMIUM ADS Package'){
 
             $plan_id=3;
+        }else if($plan == 'PREMIUM Membership'){
+
+            $plan_id=4; 
+            
+        }else{
+            $plan_id=5;
         }
 
         $user_balance=$user->balance;

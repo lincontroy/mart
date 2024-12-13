@@ -325,6 +325,13 @@ Ksh {{ number_format($total_ads, 2) }}
                             }else if($package==3){
 
                                 $planname="Premium Ads Package";
+                            }else if($package==4){
+                                $planname="Premium membership";
+                            }else if($package==5){
+                                $planname="Money pass";
+                            }else if($planname==6){
+                                $planname="Agent";
+
                             }else{
                                 $planname="No package";
                             }

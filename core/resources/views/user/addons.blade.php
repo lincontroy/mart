@@ -73,10 +73,9 @@
         <div class="row">
             @php
                 $packages = [
-                    ['name' => 'Basic Package', 'price' => '1000', 'features' => ['✅ Affiliates Bonus', '✅ Games', '✅ No Ads Earnings', '✅ No CashBack']],
-                    ['name' => 'PLATINUM Package', 'price' => '2500', 'features' => ['✅ Free Live Support', '✅ BI Weekly Ads Earnings', '✅ 5000 Cashback', '✅ Games']],
-                    ['name' => 'PREMIUM ADS Package', 'price' => '4800', 'features' => ['✅ Free Live Support', '✅ Unlimited Ads Revenue', '✅ Games', '✅ Writing Accounts']],
-                  
+                    ['name' => 'Agent', 'price' => '6000', 'features' => ['✅ Affiliates Bonus', '✅ Games', '✅ No Ads Earnings', '✅ No CashBack']],
+                    ['name' => 'Money pass', 'price' => '9000', 'features' => ['✅ Free Live Support', '✅ BI Weekly Ads Earnings', '✅ 5000 Cashback', '✅ Games']],
+                   
                 ];
             @endphp
 
