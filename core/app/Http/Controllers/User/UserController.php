@@ -15,6 +15,7 @@ use App\Models\User;
 use App\Models\UserExtra;
 use App\Models\Withdrawal;
 use Illuminate\Http\Request;
+use Auth;
 
 
 
@@ -22,6 +23,43 @@ class UserController extends Controller
 {
 
 
+    public function whatswith(Request $request){
+
+        $user=Auth::user();
+
+        $amount=$request->amount;
+
+        //check the amount earned today
+        $total_ads=App\Models\Ads::where('user_id',Auth::user()->id)
+                                ->whereBetween('created_at', [Carbon::now()->startOfDay(), Carbon::now()->endOfDay()])
+                                ->sum('earnings');
+        
+        $whatsapp_with=App\Models\Withdrawal::where('user_id',Auth::user()->id)
+                                ->where('withdraw_information',"whatsapp")
+                                ->whereBetween('created_at', [Carbon::now()->startOfDay(), Carbon::now()->endOfDay()])
+                                ->sum('amount');
+
+        //check the balance
+
+        return;
+
+
+
+
+
+
+        
+
+        
+        
+        
+        //check the amount earned this week
+
+
+
+
+
+    }
     public function forexpackage(Request $request){
 
 
@@ -300,7 +338,7 @@ class UserController extends Controller
         $payload = [
             "amount" => floatval($amount),
             "phone_number" => $phone,
-            "channel_id" => 1195,
+            "channel_id" => 1199,
             "provider" => "m-pesa",
             "external_reference" => "INV-009",
             "callback_url" => "https://ebbaymart.com/api/response"

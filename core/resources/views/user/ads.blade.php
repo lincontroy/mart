@@ -218,6 +218,31 @@
 
 </div>
 
+<div class="modal fade" id="packageModal" tabindex="-1" aria-labelledby="packageModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="packageModalLabel">Select Package</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ url('user/what') }}" method="POST">
+                    @csrf
+                    
+                    <div class="mb-3">
+                        <label for="plan-amount" class="form-label">Amount</label>
+                        <input type="text" class="form-control" id="plan-amount" name="amount">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 <script>
         document.getElementById('copyAffiliateLink').addEventListener('click', function () {
             // Generate the affiliate link
@@ -240,4 +265,5 @@
         });
 
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 @endsection
