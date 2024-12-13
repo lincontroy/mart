@@ -329,10 +329,10 @@ Ksh {{ number_format($total_ads, 2) }}
                                 $planname="Premium membership";
                             }else if($package==5){
                                 $planname="Money pass";
-                            }else if($planname==6){
+                            }else if($package==6){
                                 $planname="Agent";
 
-                            }else if($planname==0){
+                            }else if($package==0){
                                 $planname="No package";
                             }
                             ?>
