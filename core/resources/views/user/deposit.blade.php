@@ -3,15 +3,53 @@
 @section('content')
 <br><br>
 
+<style>
+        .warning-sign {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffcc00;
+            color: #333;
+            border: 2px solid #cc9900;
+            border-radius: 10px;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            max-width: 400px;
+            margin: 20px auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .warning-icon {
+            font-size: 40px;
+            color: #cc0000;
+            margin-right: 15px;
+        }
+
+        .warning-text {
+            flex: 1;
+        }
+    </style>
+
 <!-- Bootstrap JS Bundle (with Popper.js) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+
+<div class="warning-sign">
+    <span class="warning-icon">⚠️</span>
+    <div class="warning-text">All payments are made to the methods provided by the platfrom</div>
+</div>
 <div class="contents">
 
     <div class="container-fluid">
         <div class="row">
+
+        
             <div class="col-12">
                 <div class="card">
+               
                     <div class="card-header color-dark fw-500">
                         Deposits
 

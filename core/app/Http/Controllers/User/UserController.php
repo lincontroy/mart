@@ -335,20 +335,32 @@ class UserController extends Controller
         curl_close($curl);
 
         try {
+
+
+            // return $response;
+
+            
+
             $responseData = json_decode($response, true, 512, JSON_THROW_ON_ERROR);
-            if ($responseData['status'] === 'QUEUED') {
-               
+            
+            if (isset($responseData['status']) && $responseData['status'] === 'QUEUED') {
                 session()->flash('success', 'Payment request created');
-            // Redirect back or to another page
                 return redirect()->back();
             } else {
-                session()->flash('error', 'An error occured!');
-            // Redirect back or to another page
+                session()->flash('error', 'An error occurred!');
                 return redirect()->back();
             }
         } catch (JsonException $e) {
-            echo "Failed to parse JSON response: " . $e->getMessage();
+            // Log the error instead of showing it to the user
+            \Log::error('Failed to parse JSON response', [
+                'error_message' => $e->getMessage(),
+                'response' => $response
+            ]);
+        
+            session()->flash('error', 'An unexpected error occurred. Please try again.');
+            return redirect()->back();
         }
+        
         
         // echo $response;
 
