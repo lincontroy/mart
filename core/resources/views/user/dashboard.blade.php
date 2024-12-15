@@ -24,26 +24,9 @@
                                     {{ $greeting }}, {{ Auth::user()->username }}
                                 </h4>
 
-                                @if(Auth::user()->plan_id!=0)
+                                @if(Auth::user()->plan_id==0)
 
-                                <div class="breadcrumb-action justify-content-center flex-wrap">
-                                    <div class="dropdown action-btn">
-                                        <div class="action-btn">
-                                            <a href="javascript:void(0)" class="btn btn-sm btn-primary btn-add"
-                                                id="copyAffiliateLink">
-                                                <i class="la la-plus"></i> Copy My Affiliate Link
-                                            </a>
-                                        </div>
-
-                                    </div>
-
-
-                                </div>
-
-                                @else
-
-                                
-
+                               
                                 <a href="{{ url('user/packages') }}" class="alert-link">
                                     <div class="alert-icon-big alert alert-danger" role="alert">
                                         <div class="alert-icon">
@@ -56,7 +39,6 @@
                                         </div>
                                     </div>
                                 </a>
-
 
                                             @endif
                 </div>
