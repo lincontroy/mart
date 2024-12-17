@@ -36,6 +36,12 @@ class UserController extends Controller
 
         $user=Auth::user();
 
+
+        if($user->plan_id==1 || $user->plan_id==2){
+            session()->flash('error', 'Please purchase premium ads package');  
+            return redirect()->back();
+        }
+
         $amount=$request->amount;
      
 
