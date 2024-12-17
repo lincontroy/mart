@@ -34,7 +34,11 @@
                                                 <span class="userDatatable-title">id</span>
                                             </th>
                                             <th>
-                                                <span class="userDatatable-title">Name</span>
+                                                <span class="userDatatable-title">Username</span>
+                                            </th>
+                                           
+                                            <th>
+                                                <span class="userDatatable-title">Email</span>
                                             </th>
                                             <th>
                                                 <span class="userDatatable-title">Status</span>
@@ -55,6 +59,7 @@
                                     <tr>
                                         <td>{{$aff->id}}</td>
                                         <td>{{$aff->username}}</td>
+                                        <td>{{$aff->email}}</td>
 
                                         <?php
                                         if($aff->plan_id==0){
