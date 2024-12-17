@@ -42,9 +42,7 @@
 
                                             @endif
 
-                                            <h4 class="text-capitalize breadcrumb-title">
-                                    {{ $greeting }}, {{ Auth::user()->username }} <br> Welcome to ads center
-                                </h4>
+                                            
 
                                 <h4 class="text-capitalize breadcrumb-title">
                                     {{ $greeting }}, {{ Auth::user()->username }} <br> Purchase the PLATINUM package at just 2500ksh and receive 5000 cashback, Alternatively choose the PREMIUM ADS for only 4800ksh and get an instant 10,000 cashback directly to your MPESA. 
