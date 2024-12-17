@@ -41,6 +41,10 @@
                                 </a>
 
                                             @endif
+
+                                            <h4 class="text-capitalize breadcrumb-title">
+                                    {{ $greeting }}, {{ Auth::user()->username }} <br> Welcome to ads center
+                                </h4>
                 </div>
 
             </div>
