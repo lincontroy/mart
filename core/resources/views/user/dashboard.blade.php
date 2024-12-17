@@ -20,10 +20,7 @@
                     }
                 @endphp
 
-                                <h4 class="text-capitalize breadcrumb-title">
-                                    {{ $greeting }}, {{ Auth::user()->username }}
-                                </h4>
-
+                              
                                 @if(Auth::user()->plan_id==0)
 
                                
