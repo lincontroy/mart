@@ -24,41 +24,10 @@
                                     {{ $greeting }}, {{ Auth::user()->username }} <br> Welcome to ads center
                                 </h4>
 
-                                @if(Auth::user()->plan_id!=0)
-
-                                <div class="breadcrumb-action justify-content-center flex-wrap">
-                                    <div class="dropdown action-btn">
-                                        <div class="action-btn">
-                                            <a href="javascript:void(0)" class="btn btn-sm btn-primary btn-add"
-                                                id="copyAffiliateLink">
-                                                <i class="la la-plus"></i> Copy My Affiliate Link
-                                            </a>
-                                        </div>
-
-                                    </div>
-
-
-                                </div>
-
-                                @else
 
                                 
 
-                                <a href="{{ url('user/packages') }}" class="alert-link">
-                                    <div class="alert-icon-big alert alert-danger" role="alert">
-                                        <div class="alert-icon">
-                                            <span data-feather="layers"></span>
-                                        </div>
-
-                                        <div class="alert-content">
-                                            <h6 class='alert-heading'>User not active</h6>
-                                            <p>You need a package plan to proceed. Click here to select package</p>
-                                        </div>
-                                    </div>
-                                </a>
-
-
-                                            @endif
+                              
                 </div>
 
             </div>
