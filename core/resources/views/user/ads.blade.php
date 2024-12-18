@@ -112,7 +112,7 @@
                 
                 ?>
 
-              
+@if($products && !$products->isEmpty())
 
                
     <!-- First Section -->
@@ -147,6 +147,17 @@
                         </div>
                     </div>
                 </div>
+
+                @else
+
+                <div class="card alert-warning text-center col-xxl-3 col-md-6 col-ssm-12 mb-30" role="alert">
+   <h4 class="alert-heading">No Records Found</h4>
+   <p>We couldn't find any records for today. Please check back later.</p>
+</div>
+
+@endif
+
+
 
                
 
