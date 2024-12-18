@@ -25,7 +25,7 @@
 
 </head>
 
-<body class="layout-light side-menu overlayScroll">
+<body class="layout-dark side-menu overlayScroll">
     <div class="mobile-search">
         <form class="search-form">
             <span data-feather="search"></span>
@@ -35,7 +35,7 @@
 
     <div class="mobile-author-actions"></div>
     <header class="header-top">
-        <nav class="navbar navbar-light">
+        <nav class="navbar navbar-dark">
             <div class="navbar-left">
                 <a href="#" class="sidebar-toggle">
                     <img class="svg" src="{{ url('img/svg/bars.svg') }}" alt="img"></a>

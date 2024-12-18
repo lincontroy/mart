@@ -112,7 +112,7 @@
                 
                 ?>
 
-@if($products && !$products->isEmpty())
+@if($products)
 
                
     <!-- First Section -->
