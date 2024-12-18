@@ -40,9 +40,9 @@
                 <a href="#" class="sidebar-toggle">
                     <img class="svg" src="{{ url('img/svg/bars.svg') }}" alt="img"></a>
                 <a class="navbar-brand" href="#">
-                    <h2>Ebbaymart</h2>
+                    <h2 style="color:white">Ebbaymart</h2>
 
-                    <img class="light" src="{{ url('img/logo_white.png') }}" alt="img">
+                  
                 </a>
                 <form action="https://demo.jsnorm.com/" class="search-form">
                     <span data-feather="search"></span>
