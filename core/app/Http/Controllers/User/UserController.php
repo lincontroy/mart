@@ -587,7 +587,13 @@ class UserController extends Controller
 
             $upline_balance=$upline->total_ref_com;
 
-            $upline_new_balance=$upline_balance+($amount*0.75);
+            
+
+            if($amount=="2500"){
+                $upline_new_balance=$upline_balance+2000;
+            }else{
+                $upline_new_balance=$upline_balance+($amount*0.75);
+            }
 
             $upline->total_ref_com=$upline_new_balance;
 
