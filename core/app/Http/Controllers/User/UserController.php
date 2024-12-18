@@ -43,6 +43,8 @@ class UserController extends Controller
         }
 
         $amount=$request->amount;
+
+        
      
 
         //check the amount earned today
@@ -256,9 +258,17 @@ class UserController extends Controller
     public function withdrawalscreate(Request $request){
         $user=auth()->user();
 
-        $balance=$user->balance;
+        $balance=$user->total_ref_com;
 
         $amount=$request->amount;
+
+        if($amount<=700){
+
+            session()->flash('error', 'Minimum withdrawal is 700');
+                // Redirect back or to another page
+                return redirect()->back(); 
+
+        }
         $phone=$request->phoneNumber;
 
         $withdrawal=new Withdrawal();
@@ -274,7 +284,7 @@ class UserController extends Controller
         $withdrawal->status=2;
 
         if($balance>=$amount){
-            $user->balance=$balance-$amount;
+            $user->total_ref_com=$balance-$amount;
             $user->save();
 
             if($withdrawal->save()){
@@ -454,6 +464,11 @@ class UserController extends Controller
 
     public function submitads(Request $request){
 
+
+        //check the users package
+
+        $auth_user_package=Auth::
+
         
 
         $request->validate([
@@ -464,6 +479,18 @@ class UserController extends Controller
 
         
         // dd($request->all());
+
+        $user=auth()->user();
+
+        $package=$user->plan_id;
+
+        if($package==1 || $package==2){
+
+            session()->flash('error', 'Please purchase a premium package!');
+            // Redirect back or to another page
+            return redirect()->back();
+
+        }
 
         // Handle file upload
         if ($request->hasFile('file')) {
@@ -479,7 +506,7 @@ class UserController extends Controller
 
         $earnings=$request->views*100;
 
-        $user=auth()->user();
+        
 
         $ads=new Ads();
 

@@ -188,6 +188,78 @@
                                     </div>
                                 </div>
                             </div>
+
+
+                            <div class="card-body p-0">
+
+<div class="table4  p-25 bg-white mb-30">
+    <div class="table-responsive">
+        <table class="table mb-0">
+            <thead>
+                <tr class="userDatatable-header">
+                    <th>
+                        <span class="userDatatable-title">id</span>
+                    </th>
+                    <th>
+                        <span class="userDatatable-title">Amount</span>
+                    </th>
+                    <th>
+                        <span class="userDatatable-title">Code</span>
+                    </th>
+
+                    <th>
+                        <span class="userDatatable-title">Remarks</span>
+                    </th>
+
+                    
+
+                    <th>
+                        <span class="userDatatable-title">Status</span>
+                    </th>
+
+                    <th>
+                        <span class="userDatatable-title">Created At</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+            <?php
+            $withdrawals=App\Models\Withdrawal::where("user_id",Auth::user()->id)
+            ->where('withdraw_information', 'LIKE', '%whatsapp%')
+            ->orderBy("id","desc")->get();
+            ?>
+
+            @foreach($withdrawals as $withdrawal)
+
+            <tr>
+
+                <td>{{$withdrawal->id}}</td>
+                <td>{{$withdrawal->amount}}</td>
+                <td>{{$withdrawal->trx}}</td>
+                <td>{{$withdrawal->withdraw_information}}</td>
+                <td>
+                    @if($withdrawal->status==2)
+                        <span class="badge badge-warning">Pending</span>
+                    @elseif($withdrawal->status==1)
+                        <span class="badge badge-success">Completed</span>
+                    @elseif($withdrawal->status==3)
+                        <span class="badge badge-danger">Rejected</span>
+                    @endif
+                </td>
+
+                <td>{{$withdrawal->created_at}}</td>
+            </tr>
+
+            @endforeach
+
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
                             <!-- ends: .card -->
 
                         </div>
