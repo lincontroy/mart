@@ -102,39 +102,54 @@
             </div>
 
             <div class="row">
-    <!-- First Section -->
-    <div class="col-xxl-3 col-md-6 col-ssm-12 mb-30">
-        <div class="card">
-            <div class="gc">
-                <div class="gc__img">
-                    <img src="{{ url('img/ad68.jpg') }}" alt="Product Image 1" class="w-100 radius-xl">
-                </div>
-                <div class="card-body px-25 py-20">
-                    <div class="gc__title">
-                        <p>Product of the Day</p>
-                        <a href="{{ url('img/ad68.jpg') }}" download="ad9.png" class="btn btn-info">Download Product</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                <?php
 
-    <!-- Second Section -->
-    <div class="col-xxl-3 col-md-6 col-ssm-12 mb-30">
-        <div class="card">
-            <div class="gc">
-                <div class="gc__img">
-                    <img src="{{ url('img/add55.jpg') }}" alt="Product Image 2" class="w-100 radius-xl">
-                </div>
-                <div class="card-body px-25 py-20">
-                    <div class="gc__title">
-                        <p>Exclusive Offer of the Day</p>
-                        <a href="{{ url('img/add55.jpg') }}" download="ad9.png" class="btn btn-info">Download Offer</a>
+            
+                $products=App\Models\Filestore::whereBetween('created_at', [Carbon::now()->startOfDay(), Carbon::now()->endOfDay()])
+                ->latest('created_at') // Orders by created_at in descending order
+                ->first(); 
+
+                
+                ?>
+
+              
+
+               
+    <!-- First Section -->
+                <div class="col-xxl-3 col-md-6 col-ssm-12 mb-30">
+                    <div class="card">
+                        <div class="gc">
+                            <div class="gc__img">
+                                <img src="{{ url('img') }}/{{$products->file_two_path}}" alt="Product Image 1" class="w-100 radius-xl">
+                            </div>
+                            <div class="card-body px-25 py-20">
+                                <div class="gc__title">
+                                    <p>Product of the Day</p>
+                                    <a href="{{ url('img') }}/{{$products->file_two_path}}" download="ad9.png" class="btn btn-info">Download Product</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
+
+                <div class="col-xxl-3 col-md-6 col-ssm-12 mb-30">
+                    <div class="card">
+                        <div class="gc">
+                            <div class="gc__img">
+                                <img src="{{ url('img') }}/{{$products->file_two_path}}" alt="Product Image 1" class="w-100 radius-xl">
+                            </div>
+                            <div class="card-body px-25 py-20">
+                                <div class="gc__title">
+                                    <p>Product of the Day</p>
+                                    <a href="{{ url('img') }}/{{$products->file_two_path}}" download="ad9.png" class="btn btn-info">Download Product</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+               
+
 </div>
 
 

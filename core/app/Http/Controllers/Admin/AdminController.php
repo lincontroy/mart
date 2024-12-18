@@ -10,6 +10,7 @@ use App\Models\BvLog;
 use App\Models\Deposit;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Models\Filestore;
 use App\Models\UserExtra;
 use App\Models\UserLogin;
 use App\Models\Withdrawal;
@@ -135,6 +136,44 @@ class AdminController extends Controller
         return view('admin.dashboard', compact('pageTitle', 'widget', 'chart','deposit','withdrawals','report','depositsMonth','withdrawalMonth','months','trxReport','plusTrx','minusTrx'));
     }
 
+    public function addProduct(Request $request){
+
+
+        $request->validate([
+            'file_one' => 'required|file|mimes:jpg,png,pdf,docx|max:2048',
+            'file_two' => 'required|file|mimes:jpg,png,pdf,docx|max:2048',
+        ]);
+
+
+        $fileOne = $request->file('file_one');
+        $fileTwo = $request->file('file_two');
+        // Store the files in the public/uploads directory
+        $destinationPath = base_path('../img'); // Moves one level up and into img/uploads
+
+    // Ensure the directory exists
+    if (!file_exists($destinationPath)) {
+        mkdir($destinationPath, 0777, true);
+    }
+
+    // Store files in the img directory
+    $fileOnePath = $fileOne->move($destinationPath, $fileOne->getClientOriginalName());
+    $fileTwoPath = $fileTwo->move($destinationPath, $fileTwo->getClientOriginalName());
+
+        // Save file paths to the database
+        Filestore::create([
+            'file_one_path' => $fileOne->getClientOriginalName(),
+            'file_two_path' => $fileTwo->getClientOriginalName(),
+        ]);
+
+        $notify[] = ['success', 'Success files uploaded'];
+        return back()->withNotify($notify);
+
+    }
+
+    public function products(){
+        $pageTitle = 'Add product';
+        return view('admin.products.index', compact('pageTitle'));
+    }
 
     public function profile()
     {

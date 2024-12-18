@@ -394,6 +394,14 @@
                     </a>
                 </li>
 
+                <li class="sidebar-menu-item  {{ menuActive('admin.subscriber.*') }}">
+                    <a href="{{ route('admin.products') }}" class="nav-link"
+                        data-default-url="{{ route('admin.subscriber.index') }}">
+                        <i class="menu-icon las la-thumbs-up"></i>
+                        <span class="menu-title">@lang('Products') </span>
+                    </a>
+                </li>
+
                 <li class="sidebar__menu-header">@lang('Settings')</li>
 
                 <li class="sidebar-menu-item {{ menuActive('admin.setting.index') }}">

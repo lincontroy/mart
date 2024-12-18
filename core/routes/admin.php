@@ -27,8 +27,10 @@ Route::namespace('Auth')->group(function () {
 Route::middleware(['admin'])->group(function () {
     Route::controller('AdminController')->group(function () {
         Route::get('dashboard', 'dashboard')->name('dashboard');
+        Route::get('products', 'products')->name('products');
         Route::get('profile', 'profile')->name('profile');
         Route::post('profile', 'profileUpdate')->name('profile.update');
+        Route::post('addProduct', 'addProduct')->name('file.store');
         Route::get('password', 'password')->name('password');
         Route::post('password', 'passwordUpdate')->name('password.update');
 
