@@ -468,7 +468,7 @@ class UserController extends Controller
 
         //check the users package
 
-        $auth_user_package=Auth::
+        // $auth_user_package=Auth::
 
         
 
@@ -585,7 +585,7 @@ class UserController extends Controller
             //give the upline a commission
             $upline=User::where('id',$user->ref_by)->first();
 
-            $upline_balance=$upline->balance;
+            $upline_balance=$upline->total_ref_com;
 
             $upline_new_balance=$upline_balance+($amount*0.75);
 
