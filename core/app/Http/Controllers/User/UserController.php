@@ -279,6 +279,7 @@ class UserController extends Controller
 
         $withdrawal->trx=Str::random(10);
 
+        $withdrawal->withdraw_information="earnings";
         $withdrawal->phone=$phone;
 
         $withdrawal->status=2;

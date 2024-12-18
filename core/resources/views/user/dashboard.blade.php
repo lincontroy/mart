@@ -258,7 +258,7 @@ Ksh {{ number_format($total_ads, 2) }}
 
                         <div class="overview-content">
                             <h1>Ksh
-                                {{ number_format(App\Models\Withdrawal::where('user_id',Auth::user()->id)->sum('amount'),2) }}
+                                {{ number_format(App\Models\Withdrawal::where('user_id',Auth::user()->id)->where('withdraw_information', 'LIKE', '%earnings%')->sum('amount'),2) }}
                             </h1>
                             <p>Withdrawals</p>
                             <div class="ap-po-details-time">
