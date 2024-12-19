@@ -17,6 +17,8 @@ use App\Models\Withdrawal;
 use Illuminate\Http\Request;
 use Auth;
 use Carbon\Carbon;
+use App\Mail\Packageselected;
+use Illuminate\Support\Facades\Mail;
 
 
 
@@ -587,12 +589,18 @@ class UserController extends Controller
 
             $upline_balance=$upline->total_ref_com;
 
+           
+
             
 
             if($amount=="2500"){
-                $upline_new_balance=$upline_balance+2000;
+                $co=2000;
+                $com=$upline_balance+2000;
+                $upline_new_balance=$com;
             }else{
-                $upline_new_balance=$upline_balance+($amount*0.75);
+                $co=$amount*0.75;
+                $com=$upline_balance+($amount*0.75);
+                $upline_new_balance=$com;
             }
 
             $upline->total_ref_com=$upline_new_balance;
@@ -608,6 +616,24 @@ class UserController extends Controller
                 // Redirect back or to another page
                 return redirect()->back();
             }
+
+            
+
+            $order = [
+                'username' => $user->username,
+                'upline_username' => $upline->username,
+                'amount' => $co,
+                'customer_email' => $upline->email
+            ];
+
+
+            //send the email to the user
+
+            Mail::to($order['customer_email'])->send(new Packageselected($order));
+
+            
+
+
             //add the plan to the user
             session()->flash('success', 'Package purchased successfully!');
             // Redirect back or to another page
