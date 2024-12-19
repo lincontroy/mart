@@ -4168,7 +4168,8 @@ body {
     min-height: 100vh;
     font-size: 16px;
     overflow-x: hidden;
-    direction: ltr
+    direction: ltr;
+    color: #ffffff !important;
 }
 
 a {
