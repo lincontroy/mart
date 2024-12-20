@@ -4,13 +4,14 @@ namespace App\Models;
 
 use App\Constants\Status;
 use App\Traits\Searchable;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, Searchable;
+    use HasApiTokens, Searchable , Notifiable;
 
     /**
      * The attributes that should be hidden for arrays.

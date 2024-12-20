@@ -7,6 +7,8 @@ use App\Models\PasswordReset;
 use App\Models\User;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
+use App\Mail\ResetPasswordMail;
+use Illuminate\Support\Facades\Mail;
 
 class ForgotPasswordController extends Controller
 {
@@ -59,6 +61,18 @@ class ForgotPasswordController extends Controller
 
         $userIpInfo = getIpInfo();
         $userBrowserInfo = osBrowser();
+
+        $data = [
+            'code' => $code,
+            'operating_system' => @$userBrowserInfo['os_platform'],
+            'browser' => @$userBrowserInfo['browser'],
+            'ip' => @$userIpInfo['ip'],
+            'time' => @$userIpInfo['time']
+        ];
+
+        Mail::to($user->email)->send(new ResetPasswordMail($data));
+
+
         notify($user, 'PASS_RESET_CODE', [
             'code' => $code,
             'operating_system' => @$userBrowserInfo['os_platform'],
@@ -70,7 +84,8 @@ class ForgotPasswordController extends Controller
         $email = $user->email;
         session()->put('pass_res_mail',$email);
         $notify[] = ['success', 'Password reset email sent successfully'];
-        return to_route('user.password.code.verify')->withNotify($notify);
+        return redirect()->route('user.password.code.verify')->withNotify($notify);
+        // return to_route('user.password.code.verify')->withNotify($notify);
     }
 
     public function findFieldType()

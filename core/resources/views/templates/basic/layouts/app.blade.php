@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title> {{ $general->siteName(__(isset($customPageTitle) ? $customPageTitle : $pageTitle)) }}</title>
+    <title> EbbayMart</title>
     @include('partials.seo')
     <!-- Bootstrap CSS -->
     <link href="{{ asset('assets/global/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -41,11 +41,6 @@
     </div>
 
     @yield('panel')
-
-    @if (!request()->routeIs('maintenance'))
-        @include($activeTemplate . 'partials.footer')
-    @endif
-
     @php
         $cookie = App\Models\Frontend::where('data_keys', 'cookie.data')->first();
     @endphp

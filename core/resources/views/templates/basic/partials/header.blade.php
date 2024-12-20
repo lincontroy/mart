@@ -1,31 +1,7 @@
 @php
     $contact = getContent('contact_us.content', true);
 @endphp
-<div class="header-top">
-    <div class="container">
-        <div class="header-top-area">
-            <div class="header-top-item">
-                <a href="Mailto:{{ @$contact->data_values->email_address }}"><i
-                        class="fa fa-envelope"></i> {{ @$contact->data_values->email_address }}</a>
-            </div>
-            <div class="header-top-item">
-                <a href="tel:{{ @$contact->data_values->contact_number }}"><i
-                        class="fa fa-mobile-alt"></i> {{ @$contact->data_values->contact_number }}</a>
-            </div>
 
-            @if ($general->language == Status::ENABLE)
-                <div class="header-top-item ms-auto d-none d-sm-block">
-                    <select class="select-bar langSel">
-                        @foreach ($language as $item)
-                            <option value="{{ $item->code }}" @if (session('lang') == $item->code) selected @endif>
-                                {{ __($item->name) }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            @endif
-        </div>
-    </div>
-</div>
 <header class="header-bottom">
     {{-- <div> --}}
     <div class="container">

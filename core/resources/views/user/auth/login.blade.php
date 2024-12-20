@@ -97,7 +97,7 @@
                                                                     <span class="checkbox-text">Keep me logged in</span>
                                                                 </label>
                                                             </div>
-                                                            <a href="/forget/password">forget password</a>
+                                                            <a href="{{url('user/password/reset')}}">forget password</a>
                                                         </div>
 
                                                         <div
