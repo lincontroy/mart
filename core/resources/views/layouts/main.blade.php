@@ -21,7 +21,32 @@
     <!-- Toastr CSS -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
 
+<style>
+    /* Override modal background */
+.modal-content {
+    background-color: #f8f9fa; /* Light grey background */
+    color: #333; /* Darker text color */
+}
 
+/* Modal header background and text color */
+.modal-header {
+    background-color: #007bff; /* Blue background */
+    color: #fff; /* White text */
+}
+
+/* Modal footer background */
+.modal-footer {
+    background-color: #e9ecef; /* Light grey background */
+}
+
+/* Optional: Customize button styles in the modal */
+.modal-footer .btn {
+    color: #fff;
+    background-color: #6c757d;
+    border: none;
+}
+
+</style>
 
 </head>
 

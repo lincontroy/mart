@@ -90,7 +90,7 @@
                     <div class="package-body">
                         <ul class="package-features">
                             @foreach($package['features'] as $feature)
-                                <li>{{ $feature }}</li>
+                                <li style="color: black;">{{ $feature }}</li>
                             @endforeach
                         </ul>
                         <div class="package-btn">

@@ -487,13 +487,13 @@ class UserController extends Controller
 
         $package=$user->plan_id;
 
-        if($package==1 || $package==2){
+        // if($package==1 || $package==2){
 
-            session()->flash('error', 'Please purchase a premium package!');
-            // Redirect back or to another page
-            return redirect()->back();
+        //     session()->flash('error', 'Please purchase a premium package!');
+        //     // Redirect back or to another page
+        //     return redirect()->back();
 
-        }
+        // }
 
         // Handle file upload
         if ($request->hasFile('file')) {
