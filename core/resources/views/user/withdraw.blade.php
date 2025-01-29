@@ -13,29 +13,28 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header color-dark fw-500">
-                        Withdrawals
+                <div class="card-header color-dark fw-500 d-flex justify-content-between align-items-center">
+    <span>Withdrawals</span>
 
-                        <div class="action-btn" data-bs-toggle="modal" data-bs-target="#depositModal">
-                            <a href="#" class="btn btn-sm btn-primary btn-add">
-                                <i class="la la-plus"></i>Balance withdrawal</a>
-                        </div>
+    <div class="d-flex gap-3">
+        <div class="action-btn" data-bs-toggle="modal" data-bs-target="#depositModal">
+            <a href="#" class="btn btn-sm btn-primary btn-add">
+                <i class="la la-plus"></i>Balance withdrawal
+            </a>
+        </div>
 
-                        <br>
-                   
+        <div class="action-btn" data-bs-toggle="modal" data-bs-target="#depositModall">
+            <a href="#" class="btn btn-sm btn-primary btn-add">
+                <i class="la la-plus"></i>Cashback withdrawal
+            </a>
+        </div>
+    </div>
+</div>
 
-                  
-
-                        <div class="action-btn" data-bs-toggle="modal" data-bs-target="#depositModall">
-                            <a href="#" class="btn btn-sm btn-primary btn-add">
-                                <i class="la la-plus"></i>Cashback withdrawal</a>
-                        </div>
-
-                    </div>
                 
                     <div class="card-body p-0">
 
-                        <div class="table4  p-25 bg-white mb-30">
+                        <div class="table4  p-25 mb-30">
                             <div class="table-responsive">
                                 <table class="table mb-0">
                                     <thead>
@@ -75,11 +74,11 @@
                                         <td>{{$withdrawal->withdraw_information}}</td>
                                         <td>
                                             @if($withdrawal->status==2)
-                                                <span class="badge badge-warning">Pending</span>
+                                                <span class="badge bg-grd-warning text-dark">Pending</span>
                                             @elseif($withdrawal->status==1)
-                                                <span class="badge badge-success">Completed</span>
+                                                <span class="badge bg-grd-success">Completed</span>
                                             @elseif($withdrawal->status==3)
-                                                <span class="badge badge-danger">Rejected</span>
+                                                <span class="badge bg-grd-danger">Rejected</span>
                                             @endif
                                         </td>
                                     </tr>

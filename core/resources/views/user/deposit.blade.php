@@ -3,116 +3,80 @@
 @section('content')
 <br><br>
 
-<style>
-        .warning-sign {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #ffcc00;
-            color: #333;
-            border: 2px solid #cc9900;
-            border-radius: 10px;
-            padding: 20px;
-            font-family: Arial, sans-serif;
-            font-size: 18px;
-            font-weight: bold;
-            text-align: center;
-            max-width: 400px;
-            margin: 20px auto;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
 
-        .warning-icon {
-            font-size: 40px;
-            color: #cc0000;
-            margin-right: 15px;
-        }
-
-        .warning-text {
-            flex: 1;
-        }
-    </style>
 
 <!-- Bootstrap JS Bundle (with Popper.js) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+<div class="alert alert-warning border-0 bg-grd-warning alert-dismissible fade show">
+									<div class="d-flex align-items-center">
+										<div class="font-35 text-dark"><span class="material-icons-outlined fs-2">report_problem</span>
+										</div>
+										<div class="ms-3">
+											
+											<div class="text-dark">All payments are made to the methods provided by the . No payment should be made to individual numbers/bank paybills.</div>
+										</div>
+									</div>
+									<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+								</div>
 
-<div class="warning-sign">
-    <span class="warning-icon">⚠️</span>
-    <div class="warning-text">All payments are made to the methods provided by the . No payment should be made to individual numbers/bank paybills.</div>
-</div>
 <div class="contents">
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-               
-                    <div class="card-header color-dark fw-500">
-                        Deposits
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header color-dark fw-500 d-flex justify-content-between align-items-center">
+                    <h6 class="mb-0">Deposits</h6>
 
-                        <div class="action-btn" data-bs-toggle="modal" data-bs-target="#depositModal">
-                            <a href="#" class="btn btn-sm btn-primary btn-add">
-                                <i class="la la-plus"></i> Add New</a>
-                        </div>
-                    </div>
-                    <div class="card-body p-0">
-
-                        <div class="table4  p-25 bg-white mb-30">
-                            <div class="table-responsive">
-                                <table class="table mb-0">
-                                    <thead>
-                                        <tr class="userDatatable-header">
-                                            <th>
-                                                <span class="userDatatable-title">id</span>
-                                            </th>
-                                            <th>
-                                                <span class="userDatatable-title">Amount</span>
-                                            </th>
-                                            <th>
-                                                <span class="userDatatable-title">Code</span>
-                                            </th>
-
-                                            <th>
-                                                <span class="userDatatable-title">Status</span>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    <?php
-                                    $deposits=App\Models\Deposit::where("user_id",Auth::user()->id)
-                                    ->orderBy("id","desc")
-                                    ->get();
-                                    ?>
-
-                                    @foreach($deposits as $deposit)
-                                        <tr>
-                                            <td>{{$deposit->id}}</td>
-                                            <td>{{$deposit->amount}}</td>
-                                            <td>{{$deposit->trx}}</td>
-                                            <td>
-                                                @if($deposit->status==0)
-                                                    <span class="badge badge-warning">Pending</span>
-                                                @elseif($deposit->status==1)
-                                                    <span class="badge badge-success">Success</span>
-                                                @else
-                                                    <span class="badge badge-danger">Rejected</span>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                    @endforeach
-
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#depositModal">
+                        <i class="la la-plus"></i> Add New
+                    </button>
                 </div>
-            </div>
-        </div>
-    </div>
+
+                <div class="card-body p-3">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Amount</th>
+                                    <th>Code</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $deposits = App\Models\Deposit::where("user_id", Auth::user()->id)
+                                    ->orderBy("id", "desc")
+                                    ->get();
+                                ?>
+
+                                @foreach($deposits as $deposit)
+                                    <tr>
+                                        <td>{{ $deposit->id }}</td>
+                                        <td>{{ number_format($deposit->amount, 2) }}</td>
+                                        <td>{{ $deposit->trx }}</td>
+                                        <td>
+                                            @if ($deposit->status == 0)
+                                                <span class="badge bg-warning text-dark">Pending</span>
+                                            @elseif ($deposit->status == 1)
+                                                <span class="badge bg-success">Success</span>
+                                            @else
+                                                <span class="badge bg-danger">Rejected</span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div> <!-- End Table Responsive -->
+                </div> <!-- End Card Body -->
+            </div> <!-- End Card -->
+        </div> <!-- End Col -->
+    </div> <!-- End Row -->
+</div> <!-- End Container -->
+
 </div>
 
 

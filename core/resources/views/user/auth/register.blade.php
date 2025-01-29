@@ -1,37 +1,43 @@
+
+
 <!doctype html>
-<html lang="en" dir="ltr">
+<html lang="en" data-bs-theme="blue-theme">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ebbaymart</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ebbaymart </title>
+    <!--favicon-->
+    <link rel="icon" href="{{ url('assets/assetss/images/favicon-32x32.png') }}"
+        type="image/png">
+    <!-- loader-->
+    <link href="{{ url('assets/assetss/css/pace.min.css') }}" rel="stylesheet">
+    <script src="{{ url('assets/assetss/js/pace.min.js') }}"></script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <!--plugins-->
+    <link
+        href="{{ url('assets/assetss/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css"
+        href="{{ url('assets/assetss/plugins/metismenu/metisMenu.min.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ url('assets/assetss/plugins/metismenu/mm-vertical.css') }}">
+    <!--bootstrap css-->
+    <link href="{{ url('assets/assetss/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" rel="stylesheet">
+    <!--main css-->
+    <link href="{{ url('assets/assetss/css/bootstrap-extended.css') }}" rel="stylesheet">
+    <link href="{{ url('sass/main.css') }}" rel="stylesheet">
+    <link href="{{ url('sass/dark-theme.css') }}" rel="stylesheet">
+    <link href="{{ url('sass/blue-theme.css') }}" rel="stylesheet">
+    <link href="{{ url('sass/responsive.css') }}" rel="stylesheet">
 
-    <!-- inject:css-->
-
-    <link rel="stylesheet" href="{{ url('css/plugin.min.css') }}">
-
-    <link rel="stylesheet" href="{{ url('style.css') }}">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
-
-    <!-- endinject -->
-
-    <link rel="icon" type="{{ url('image/png') }}" sizes="16x16"
-        href="{{ url('img/favicon.png') }}">
 </head>
 
 <body>
-    <main class="main-content">
 
-        <div class="signUP-admin">
-
-            <div class="container-fluid">
-                <div class="row justify-content-center">
-                    <div class="col-xl-4 col-lg-5 col-md-5 p-0">
-
-                    <?php
+<?php
                     $ref=request()->ref;
 
                     if($ref==null){
@@ -39,177 +45,170 @@
                     }
                     ?>
 
-                   
+    <!--authentication-->
+    <div class="auth-basic-wrapper d-flex align-items-center justify-content-center">
+        <div class="container-fluid my-5 my-lg-0">
+            <div class="row">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5 col-xxl-4 mx-auto">
+                    <div class="card rounded-4 mb-0 border-top border-4 border-primary border-gradient-1">
+                        <div class="card-body p-5">
+                            <img src="assets/images/logo1.png" class="mb-4" width="145" alt="">
+                            <h4 class="fw-bold">Get Started Now</h4>
+                            <p class="mb-0">Create an account to proceed</p>
 
-                    </div><!-- End: .col-xl-4  -->
-                    <div class="col-xl-8 col-lg-7 col-md-7 col-sm-8">
-                        <div class="signUp-admin-right signIn-admin-right  p-md-40 p-10">
-                            <div
-                                class="signUp-topbar d-flex align-items-center justify-content-md-end justify-content-center mt-md-0 mb-md-0 mt-20 mb-1">
-                                <p class="mb-0">
-                                    Do you have an account?
-                                    <a href="{{url('user/login')}}" class="color-primary">
-                                        Sign in
-                                    </a>
-                                </p>
-                            </div><!-- End: .signUp-topbar  -->
-                            <div class="row justify-content-center">
-                                <div class="col-xl-7 col-lg-8 col-md-12">
-                                    <div class="edit-profile mt-md-25 mt-0">
-                                        <div class="card border-0">
-                                            <div class="card-header border-0  pb-md-15 pb-10 pt-md-20 pt-10 ">
-                                                <div class="edit-profile__title">
-                                                    <h6>Sign in to <span class="color-primary">Ebbaymart</span></h6>
-                                                </div>
-                                            </div>
-                                            <form class="create-account-form verify-gcaptcha" method="post"
-                                                action="{{ route('user.registerr') }}">
-                                                @csrf
+                            <div class="form-body my-5">
+                                <form class="row g-3" action="{{ route('user.registerr') }}" method="POST">
 
-                                                @if(session('success'))
-                                                    <div class="alert alert-success">
-                                                        {{ session('success') }}</div>
-                                                @endif
+                                    @csrf
 
-                                                @if($errors->has('login_error'))
-                                                    <div class="alert alert-danger">
-                                                        {{ $errors->first('login_error') }}</div>
-                                                @endif
+                                    @if(session('success'))
+                                        <div class="alert alert-success">
+                                            {{ session('success') }}</div>
+                                    @endif
 
-                                                <div class="card-body">
-                                                    <div class="edit-profile__body">
-                                                        <div class="form-group mb-20">
-                                                            <label for="username">Email Address</label>
-                                                            <input type="email" class="form-control" id="username"
-                                                                placeholder="Email Address" name="email" required>
-                                                        </div>
+                                    @if($errors->has('login_error'))
+                                        <div class="alert alert-danger">
+                                            {{ $errors->first('login_error') }}</div>
+                                    @endif
+                                    <div class="col-12">
+                                        <label for="inputEmailAddress" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="inputEmailAddress"
+                                            placeholder="jhon@example.com" name="email">
+                                        @error('email')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
 
-                                                        <div class="form-group mb-20">
-                                                            <label for="username">First name</label>
-                                                            <input type="text" class="form-control" id="username"
-                                                                placeholder="First name" name="firstname" required>
-                                                        </div>
+                                    </div>
 
-                                                        <div class="form-group mb-20">
-                                                            <label for="username">Last name</label>
-                                                            <input type="text" class="form-control" id="username"
-                                                                placeholder="Last name" name="lastname" required>
-                                                        </div>
+                                    <div class="col-12">
+                                        <label for="inputEmailAddress" class="form-label">First Name</label>
+                                        <input type="text" class="form-control" id=""
+                                            placeholder="John" name="firstname">
+                                        @error('firstname')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
 
-                                                        <div class="form-group mb-20">
-                                                            <label for="username">Username</label>
-                                                            <input type="text" class="form-control" id="username"
-                                                                placeholder="Username" name="username" required>
-                                                        </div>
+                                    </div>
 
-                                                        <div class="form-group mb-20">
-                                                            <label for="mobile">Mobile</label>
-                                                            <input type="tel" class="form-control" id="mobile"
-                                                            placeholder="0724555676" maxlength="10" pattern="[0-9]{10}" name="mobile" required>
-                                                        </div>
+                                    <div class="col-12">
+                                        <label for="inputEmailAddress" class="form-label">Last name</label>
+                                        <input type="text" class="form-control" id=""
+                                            placeholder="Doe" name="lastname">
+                                        @error('lastname')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="inputEmailAddress" class="form-label">Username</label>
+                                        <input type="text" class="form-control" id=""
+                                            placeholder="john" name="username">
+                                        @error('username')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="inputEmailAddress" class="form-label">Mobile No</label>
+                                        <input type="tel" class="form-control" id="inputEmailAddress"
+                                            placeholder="0734899585" pattern="[0-9]{10}" name="mobile" required>
+                                        @error('mobile')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+
+                                    </div>
 
 
-                                                        <div class="form-group mb-20">
-                                                            <label for="username">Reffered By</label>
-                                                            <input type="text" class="form-control" id="text"
-                                                                placeholder="Username" name="referredby" value="{{$ref}}" readonly>
-                                                        </div>
 
-                                                        <div class="form-group mb-15">
-                                                            <label for="password-field">password</label>
-                                                            <div class="position-relative">
-                                                                <input id="password-field" type="password"
-                                                                    class="form-control" name="password">
-                                                                <div
-                                                                    class="fa fa-fw fa-eye-slash text-light fs-16 field-icon toggle-password2">
-                                                                </div>
-                                                            </div>
-                                                            @error('password')
-                                                                <span class="text-danger">{{ $message }}</span>
-                                                            @enderror
-                                                        </div>
+                                    <div class="col-12">
+                                        <label for="inputEmailAddress" class="form-label">Reffered By</label>
+                                        <input type="text" class="form-control" id="inputEmailAddress"
+                                             name="referredby" value="{{$ref}}"  readonly>
+                                        @error('referredby')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
 
-                                                        <div class="form-group mb-15">
-                                                            <label for="password-field">password confirmation</label>
-                                                            <div class="position-relative">
-                                                                <input id="password-field" type="password"
-                                                                    class="form-control" name="password_confirmation">
-                                                                <div
-                                                                    class="fa fa-fw fa-eye-slash text-light fs-16 field-icon toggle-password2">
-                                                                </div>
-                                                            </div>
-                                                            @error('password')
-                                                                <span class="text-danger">{{ $message }}</span>
-                                                            @enderror
-                                                        </div>
-                                                        <div class="signUp-condition signIn-condition">
-                                                            <div class="checkbox-theme-default custom-checkbox ">
-                                                                <input class="checkbox" type="checkbox" id="check-1">
-                                                                <label for="check-1">
-                                                                    <span class="checkbox-text">Keep me logged in</span>
-                                                                </label>
-                                                            </div>
-                                                           
-                                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="inputChoosePassword" class="form-label">Password</label>
+                                        <div class="input-group" id="show_hide_password">
+                                            <input type="password" class="form-control border-end-0"
+                                                id="inputChoosePassword" value="" name="password"
+                                                placeholder="Enter Password">
+                                            <a href="javascript:;" class="input-group-text bg-transparent"><i
+                                                    class="bi bi-eye-slash-fill"></i></a>
 
-                                                        <div
-                                                            class="button-group d-flex pt-1 justify-content-md-start justify-content-center">
-                                                            <button type="submit"
-                                                                class="btn btn-primary btn-default btn-squared mr-15 text-capitalize lh-normal px-50 py-15 signIn-createBtn ">
-                                                                Sign up
-                                                            </button>
-                                                        </div>
+                                            @error('password')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
 
-                                                    </div>
-                                                </div><!-- End: .card-body -->
-                                            </form>
-                                        </div><!-- End: .card -->
-                                    </div><!-- End: .edit-profile -->
-                                </div><!-- End: .col-xl-5 -->
+                                    <div class="col-12">
+                                        <label for="inputChoosePassword" class="form-label">Confirm Password</label>
+                                        <div class="input-group" id="show_hide_password">
+                                            <input type="password" class="form-control border-end-0"
+                                                id="inputChoosePassword" value="" name="password_confirmation"
+                                                placeholder="Enter Password">
+                                            <a href="javascript:;" class="input-group-text bg-transparent"><i
+                                                    class="bi bi-eye-slash-fill"></i></a>
+
+                                            @error('password')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <div class="col-12">
+                                        <div class="d-grid">
+                                            <button type="submit" class="btn btn-grd-primary">REGISTER</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="text-start">
+                                            <p class="mb-0">Already have an account? <a
+                                                    href="{{url('user/login')}}">Login</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                        </div><!-- End: .signUp-admin-right  -->
-                    </div><!-- End: .col-xl-8  -->
+
+
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div><!-- End: .signUP-admin  -->
-
-    </main>
-    <div id="overlayer">
-        <span class="loader-overlay">
-            <div class="atbd-spin-dots spin-lg">
-                <span class="spin-dot badge-dot dot-primary"></span>
-                <span class="spin-dot badge-dot dot-primary"></span>
-                <span class="spin-dot badge-dot dot-primary"></span>
-                <span class="spin-dot badge-dot dot-primary"></span>
-            </div>
-        </span>
+            <!--end row-->
+        </div>
     </div>
+    <!--authentication-->
 
-    <!-- inject:js-->
 
-    <script src="{{ url('js/plugins.min.js') }}"></script>
+    <!--plugins-->
+    <script src="{{ url('assets/js/jquery.min.js') }}"></script>
 
-    <script src="{{ url('js/script.min.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
-    @if (session('success'))
-        toastr.success('{{ session('success') }}');
-    @endif
+        $(document).ready(function () {
+            $("#show_hide_password a").on('click', function (event) {
+                event.preventDefault();
+                if ($('#show_hide_password input').attr("type") == "text") {
+                    $('#show_hide_password input').attr('type', 'password');
+                    $('#show_hide_password i').addClass("bi-eye-slash-fill");
+                    $('#show_hide_password i').removeClass("bi-eye-fill");
+                } else if ($('#show_hide_password input').attr("type") == "password") {
+                    $('#show_hide_password input').attr('type', 'text');
+                    $('#show_hide_password i').removeClass("bi-eye-slash-fill");
+                    $('#show_hide_password i').addClass("bi-eye-fill");
+                }
+            });
+        });
 
-    @if (session('error'))
-        toastr.error('{{ session('error') }}');
-    @endif
+    </script>
 
-    @if (session('info'))
-        toastr.info('{{ session('info') }}');
-    @endif
-
-    @if (session('warning'))
-        toastr.warning('{{ session('warning') }}');
-    @endif
-</script>
-
-    <!-- endinject-->
 </body>
 
 </html>

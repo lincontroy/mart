@@ -6,95 +6,69 @@
 
 <!-- Bootstrap JS Bundle (with Popper.js) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <div class="contents">
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header color-dark fw-500">
-                        Affiliates
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <!-- Card Header -->
+                <div class="card-header color-dark fw-500 d-flex justify-content-between align-items-center">
+                    <h6 class="mb-0">Affiliates</h6>
 
-                        <div class="action-btn">
-                            <a href="javascript:void(0)" class="btn btn-sm btn-primary btn-add" id="copyAffiliateLink">
-                                <i class="la la-plus"></i> Copy Link
-                            </a>
-                        </div>
+                    <button class="btn btn-sm btn-primary" id="copyAffiliateLink">
+                        <i class="la la-link"></i> Copy Link
+                    </button>
+                </div>
 
-                    </div>
-                    <div class="card-body p-0">
-
-                        <div class="table4  p-25 bg-white mb-30">
-                            <div class="table-responsive">
-                                <table class="table mb-0">
-                                    <thead>
-                                        <tr class="userDatatable-header">
-                                            <th>
-                                                <span class="userDatatable-title">id</span>
-                                            </th>
-                                            <th>
-                                                <span class="userDatatable-title">Username</span>
-                                            </th>
-                                           
-                                            <th>
-                                                <span class="userDatatable-title">Email</span>
-                                            </th>
-                                            <th>
-                                                <span class="userDatatable-title">Status</span>
-                                            </th>
-
-                                            <th>
-                                                <span class="userDatatable-title">Package</span>
-                                            </th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    <?php
-                                    $affs=App\Models\User::where("ref_by",Auth::user()->id)->get();
-                                    ?>
-                                    @foreach($affs as $aff)
+                <!-- Card Body -->
+                <div class="card-body p-3">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                    <th>Package</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $affiliates = App\Models\User::where("ref_by", Auth::user()->id)->get();
+                                ?>
+                                @foreach($affiliates as $aff)
                                     <tr>
-                                        <td>{{$aff->id}}</td>
-                                        <td>{{$aff->username}}</td>
-                                        <td>{{$aff->email}}</td>
+                                        <td>{{ $aff->id }}</td>
+                                        <td>{{ $aff->username }}</td>
+                                        <td>{{ $aff->email }}</td>
 
                                         <?php
-                                        if($aff->plan_id==0){
-                                           $status="Not active";
-                                        }else{
-                                            $status="Active";
-                                        }
-                                        ?>
+                                        $status = ($aff->plan_id == 0) ? "Not active" : "Active";
 
-                                        <?php
-                                        if($aff->plan_id==1){
-                                           $plan_name="Basic package";
-                                        }else if($aff->plan_id==2){
-                                            $plan_name="Basic package";
-                                        }
+                                        $plan_name = match ($aff->plan_id) {
+                                            1 => "Basic Package",
+                                            2 => "Premium Package",
+                                            default => "Unknown Package",
+                                        };
                                         ?>
                                         
-                                        <td>{{$status}}</td>
-                                        <td>{{$status}}</td>
-
+                                        <td><span class="badge {{ $status == 'Active' ? 'bg-success' : 'bg-warning text-dark' }}">{{ $status }}</span></td>
+                                        <td>{{ $plan_name }}</td>
                                     </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div> <!-- End Table Responsive -->
+                </div> <!-- End Card Body -->
+            </div> <!-- End Card -->
+        </div> <!-- End Col -->
+    </div> <!-- End Row -->
+</div> <!-- End Container -->
 
-                                    @endforeach
-
-                                    
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 
