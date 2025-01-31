@@ -35,6 +35,11 @@ return [
             'root' => storage_path('app'),
         ],
 
+        'img' => [
+        'driver' => 'local',
+        'root' => public_path('assets/images/vid'), // Adjust the path as needed
+        'visibility' => 'public',
+    ],
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
