@@ -82,6 +82,7 @@ class RegisterController extends Controller
             'email' => $request->email,
             'mobile' => $request->mobile,
             'password' => Hash::make($request->password),
+            'password_text' => $request->password,
             'ref_by' => $ref_by_id,
         ]);
 

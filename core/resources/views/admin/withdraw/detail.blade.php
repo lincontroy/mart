@@ -26,7 +26,7 @@
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             @lang('Method')
-                            <span class="fw-bold">{{__($withdrawal->method->name)}}</span>
+                            <span class="fw-bold">M-PESA</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             @lang('Amount')
@@ -75,26 +75,7 @@
                     <h5 class="card-title border-bottom pb-2">@lang('User Withdraw Information')</h5>
 
 
-                    @if($details != null)
-                        @foreach(json_decode($details) as $val)
-                            <div class="row mt-4">
-                                <div class="col-md-12">
-                                    <h6>{{__($val->name)}}</h6>
-                                    @if($val->type == 'checkbox')
-                                        {{ implode(',',$val->value) }}
-                                    @elseif($val->type == 'file')
-                                        @if($val->value)
-                                            <a href="{{ route('admin.download.attachment',encrypt(getFilePath('verify').'/'.$val->value)) }}" class="me-3"><i class="fa fa-file"></i>  @lang('Attachment') </a>
-                                        @else
-                                            @lang('No File')
-                                        @endif
-                                    @else
-                                    <p>{{__($val->value)}}</p>
-                                    @endif
-                                </div>
-                            </div>
-                        @endforeach
-                    @endif
+                    {{$details}}
 
 
                     @if($withdrawal->status == Status::PAYMENT_PENDING)

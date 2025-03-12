@@ -66,13 +66,17 @@ class WithdrawalController extends Controller
             $pending = clone $withdrawals;
             $rejected = clone $withdrawals;
 
-            $successfulSummery = $successful->where('status',Status::PAYMENT_SUCCESS)->sum('amount');
+            $successfulSummery = $successful->where('status',Status::PAYMENT_SUCCESS)
+            ->where('withdraw_information', '"earnings"') 
+            ->sum('amount');
             $pendingSummery = $pending->where('status',Status::PAYMENT_PENDING)->sum('amount');
             $rejectedSummery = $rejected->where('status',Status::PAYMENT_REJECT)->sum('amount');
 
 
             return [
-                'data'=> $withdrawals->with(['user','method'])->orderBy('id','desc')->paginate(getPaginate()),
+                'data'=> $withdrawals->with(['user','method'])
+                ->where('withdraw_information', '"earnings"') 
+                ->orderBy('id','desc')->paginate(getPaginate()),
                 'summery'=>[
                     'successful'=>$successfulSummery,
                     'pending'=>$pendingSummery,
@@ -100,16 +104,16 @@ class WithdrawalController extends Controller
         $withdraw->admin_feedback = $request->details;
         $withdraw->save();
 
-        notify($withdraw->user, 'WITHDRAW_APPROVE', [
-            'method_name' => $withdraw->method->name,
-            'method_currency' => $withdraw->currency,
-            'method_amount' => showAmount($withdraw->final_amount),
-            'amount' => showAmount($withdraw->amount),
-            'charge' => showAmount($withdraw->charge),
-            'rate' => showAmount($withdraw->rate),
-            'trx' => $withdraw->trx,
-            'admin_details' => $request->details
-        ]);
+        // notify($withdraw->user, 'WITHDRAW_APPROVE', [
+        //     'method_name' => $withdraw->method->name,
+        //     'method_currency' => $withdraw->currency,
+        //     'method_amount' => showAmount($withdraw->final_amount),
+        //     'amount' => showAmount($withdraw->amount),
+        //     'charge' => showAmount($withdraw->charge),
+        //     'rate' => showAmount($withdraw->rate),
+        //     'trx' => $withdraw->trx,
+        //     'admin_details' => $request->details
+        // ]);
 
         $notify[] = ['success', 'Withdrawal approved successfully'];
         return to_route('admin.withdraw.pending')->withNotify($notify);
