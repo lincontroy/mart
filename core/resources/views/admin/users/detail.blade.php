@@ -1,6 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('panel')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <div class="row">
         <div class="col-12">
             <div class="row gy-4">
@@ -178,6 +179,85 @@
                         </button>
                     @endif
                 </div>
+
+                
+                <div class="flex-fill">
+    <a class="btn btn--danger btn--shadow w-100 btn-lg delete-user-btn" 
+       href="#" 
+       data-user-id="{{ $user->id }}"
+       data-url="{{ route('admin.users.delete', $user->id) }}">
+        <i class="las la-user-check"></i>@lang('Delete user')
+    </a>
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.delete-user-btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const url = this.getAttribute('data-url');
+            const userId = this.getAttribute('data-user-id');
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Send AJAX request to delete user
+                    fetch(url, {
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire(
+                                'Deleted!',
+                                'The user has been deleted.',
+                                'success'
+                            ).then(() => {
+                                // Remove the user row from the table or redirect
+                                // For example: button.closest('tr').remove();
+                                window.location.href = '{{ route("admin.users.all") }}';
+                            });
+                        } else {
+                            Swal.fire(
+                                'Error!',
+                                data.message || 'Something went wrong.',
+                                'error'
+                            );
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire(
+                            'Error!',
+                            'An error occurred while deleting the user.',
+                            'error'
+                        );
+                    });
+                }else{
+                    console.log('error');
+                }
+            });
+        });
+    });
+});
+</script>
+               
+                
+
+                
             </div>
 
             <div class="card mt-30">
@@ -230,6 +310,12 @@
                         </div>
 
                         <div class="row mt-4">
+                        <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>@lang('Password')</label>
+                                    <input class="form-control" name="password" type="text" value="{{ @$user->password_text }}">
+                                </div>
+                            </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>@lang('Address')</label>

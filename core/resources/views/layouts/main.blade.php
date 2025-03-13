@@ -643,6 +643,17 @@
   </header>
   <!--end top header-->
 
+  @if(Auth::user()->status==0)
+
+
+<br><br><br><br>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Your account has been banned!</strong> Please contact support@ebbaymart.com for more information.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+  </div>
+
+  @else
 
    <!--start sidebar-->
    <aside class="sidebar-wrapper" data-simplebar="true">
@@ -657,6 +668,7 @@
             <span class="material-icons-outlined">close</span>
         </div>
     </div>
+
     <div class="sidebar-nav">
         <ul class="metismenu" id="sidenav">
             <li>
@@ -921,7 +933,7 @@
         toastr.warning('{{ session('warning') }}');
     @endif
 </script>
-
+@endif
 </body>
 
 </html>

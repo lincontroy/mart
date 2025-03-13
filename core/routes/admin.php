@@ -59,6 +59,10 @@ Route::middleware(['admin'])->group(function () {
         Route::get('mobile-verified', 'mobileVerifiedUsers')->name('mobile.verified');
         Route::get('with-balance', 'usersWithBalance')->name('with.balance');
         Route::get('paid', 'paidUsers')->name('paid');
+        // Route::get('paid', 'paidUsers')->name('paid');
+
+        
+        Route::delete('{user}/delete', 'destroy')->name('delete');
 
         Route::get('detail/{id}', 'detail')->name('detail');
         Route::get('kyc-data/{id}', 'kycDetails')->name('kyc.details');

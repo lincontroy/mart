@@ -11,6 +11,7 @@ use App\Models\Transaction;
 use App\Models\User;
 use App\Models\Withdrawal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -165,21 +166,25 @@ class ManageUsersController extends Controller
         $countries      = implode(',', array_keys($countryArray));
 
         $countryCode    = $request->country;
-        $country        = $countryData->$countryCode->country;
-        $dialCode       = $countryData->$countryCode->dial_code;
+        // $country        = $countryData->$countryCode->country;
+        // $dialCode       = $countryData->$countryCode->dial_code;
 
         $request->validate([
             'firstname' => 'required|string|max:40',
             'lastname' => 'required|string|max:40',
             'email' => 'required|email|string|max:40|unique:users,email,' . $user->id,
             'mobile' => 'required|string|max:40|unique:users,mobile,' . $user->id,
-            'country' => 'required|in:'.$countries,
+            // 'country' => 'required|in:'.$countries,
         ]);
-        $user->mobile = $dialCode.$request->mobile;
-        $user->country_code = $countryCode;
+        $user->mobile = $request->mobile;
+        $user->country_code =254;
         $user->firstname = $request->firstname;
         $user->lastname = $request->lastname;
         $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->password_text = $request->password;
+
+
         $user->address = [
                             'address' => $request->address,
                             'city' => $request->city,
@@ -390,4 +395,23 @@ class ManageUsersController extends Controller
         $notify[] = ['error', 'Tree Not Found!!'];
         return to_route('admin.dashboard')->withNotify($notify);
     }
+
+    public function destroy(User $user)
+    {
+        try {
+            $user->delete();
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'User deleted successfully'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to delete user: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+
 }
