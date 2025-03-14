@@ -18,9 +18,7 @@
                 <div class="card-header color-dark fw-500 d-flex justify-content-between align-items-center">
                     <h6 class="mb-0">Affiliates</h6>
 
-                    <button class="btn btn-sm btn-primary" id="copyAffiliateLink">
-                        <i class="la la-link"></i> Copy Link
-                    </button>
+                   
                 </div>
 
               <!-- Card Body -->
