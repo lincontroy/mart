@@ -755,7 +755,7 @@
             </li>
 
             <li>
-                <a href="{{ url('user/jobs') }}">
+                <a href="{{ url('user/jobpostings') }}">
                     <div class="parent-icon"><i class="material-icons-outlined">work</i>
                     </div>
                     <div class="menu-title">Jobs</div>
