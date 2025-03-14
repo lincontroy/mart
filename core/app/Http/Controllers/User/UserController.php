@@ -43,6 +43,12 @@ class UserController extends Controller
             ]);
         }
 
+        $new_balance=$user->balance-500;
+
+        $user->balance=$new_balance;
+
+        $user->save();
+
         // Here you could deduct balance or process the application
         // For this example, we'll just return success
         return response()->json([

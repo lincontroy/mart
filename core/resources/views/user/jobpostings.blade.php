@@ -63,44 +63,57 @@ $jobPostings = App\Models\JobPosting::all();
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-        $(document).ready(function () {
-            $('.apply-btn').on('click', function () {
-                const jobId = $(this).data('job-id');
-                $('#applyJobId').val(jobId);
-            });
-            
-            $('#submitApplication').on('click', function (e) {
-                e.preventDefault();
-                const jobId = $('#applyJobId').val();
-                const url = "{{ url('user/jobpostings/apply/') }}/" + jobId;
+    $(document).ready(function () {
+        $('.apply-btn').on('click', function () {
+            const jobId = $(this).data('job-id');
+            $('#applyJobId').val(jobId);
+        });
+        
+        $('#submitApplication').on('click', function (e) {
+            e.preventDefault();
+            const jobId = $('#applyJobId').val();
+            const url = "{{ url('user/jobpostings/apply/') }}/" + jobId;
 
-
-                $.ajax({
-                    url: url,
-                    method: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function (response) {
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function (response) {
+                    if (response.success) {
                         Swal.fire({
-                            icon: response.success ? 'success' : 'error',
-                            title: response.success ? 'Success' : 'Error',
+                            icon: 'success',
+                            title: 'Success',
                             text: response.message,
-                        });
-                        if (response.success) {
+                            showConfirmButton: true,
+                        }).then(() => {
                             $('#applyModal').modal('hide');
-                        }
-                    },
-                    error: function (xhr) {
+                        });
+                    } else {
                         Swal.fire({
                             icon: 'error',
-                            title: 'Error',
-                            text: 'Something went wrong!',
+                            title: 'Insufficient Balance',
+                            text: response.message,
+                            showCancelButton: true,
+                            confirmButtonText: 'Go to Deposit',
+                            cancelButtonText: 'Close'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = '{{ url("user/deposit") }}'; // Redirect to deposit page
+                            }
                         });
                     }
-                });
+                },
+                error: function (xhr) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Something went wrong!',
+                    });
+                }
             });
         });
-    </script>
-
+    });
+</script>
 @endsection
