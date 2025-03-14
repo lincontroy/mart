@@ -322,54 +322,7 @@ Ksh {{ number_format($total_ads, 2) }}</h2>
     
 </div>
 
-<div class="row">
-<h6 class="mb-0 text-uppercase">Recent transactions</h6>
-				<hr>
-				<div class="card">
-					<div class="card-body">
-						<div class="table-responsive">
-							<table id="example2" class="table table-striped table-bordered">
-								<thead>
-									<tr>
-                                    <th>id</th>
-                                                <th>Amount</th>
-                                                <th>Transaction ID</th>
-                                                <th>Remarks</th>
-                                                <th>Time</th>
-									</tr>
-								</thead>
-								<tbody>
-                                <?php
-                                        $transactions=App\Models\Transaction::where('user_id',Auth::user()->id)->orderBy('id','DESC')->get();
-                                        
-                                        ?>
-                                            @foreach($transactions as $transaction)
-                                                <tr>
-                                                    <td>{{ $transaction->id }}</td>
-                                                    <td>Ksh {{ $transaction->amount }}</td>
-                                                    <td>{{ $transaction->trx }}</td>
-                                                    <td>{{ $transaction->remark }}</td>
-                                                    <td>{{ $transaction->created_at }}</td>
-                                                </tr>
-                                            @endforeach
 
-
-									
-								</tbody>
-								<tfoot>
-									<tr>
-                                    <th>id</th>
-                                                <th>Amount</th>
-                                                <th>Transaction ID</th>
-                                                <th>Remarks</th>
-                                                <th>Time</th>
-									</tr>
-								</tfoot>
-							</table>
-						</div>
-					</div>
-				</div>
-</div>
 <script>
     document.getElementById('copyAffiliateLink').addEventListener('click', function () {
         // Generate the affiliate link
