@@ -35,6 +35,19 @@
   <link href="{{url('sass/responsive.css')}}" rel="stylesheet">
 
   <style>
+
+.menu-title-wrapper {
+            display: flex;
+            align-items: center;
+        }
+        .copy-icon {
+            margin-left: 10px;
+            font-size: 18px;
+            color: #6c757d; /* Bootstrap gray, adjust as needed */
+        }
+        .copy-icon:hover {
+            color: #007bff; /* Bootstrap primary color on hover */
+        }
     /* Dark mode adjustments for Toastr notifications */
 .toast {
     background-color: #222 !important; /* Dark background */
@@ -742,11 +755,21 @@
             </li>
 
             <li>
-                <a href="{{ url('user/games') }}">
-                    <div class="parent-icon"><i class="material-icons-outlined">sports_esports</i></div>
-                    <div class="menu-title">Games</div>
+                <a href="{{ url('user/jobs') }}">
+                    <div class="parent-icon"><i class="material-icons-outlined">work</i>
+                    </div>
+                    <div class="menu-title">Jobs</div>
                 </a>
             </li>
+            <li>
+            <a href="javascript:void(0);" id="monetizedButton" data-copy-text="{{ url('user/referral/') . Auth::user()->id }}" class="menu-item">
+                <div class="menu-title-wrapper">
+                    <div class="parent-icon"><i class="material-icons-outlined">monetization_on</i></div>
+                    <div class="menu-title">Monetized</div>
+                </div>
+                <i class="material-icons-outlined copy-icon">content_copy</i>
+            </a>
+        </li>
 
             <li>
                 <a href="mailto:support@ebbaymart.com">
@@ -914,6 +937,41 @@
   </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script>
+        $(document).ready(function () {
+            $('#monetizedButton').on('click', function (e) {
+                e.preventDefault(); // Prevent default link behavior
+
+                const baseUrl = "{{ url('user/') }}"; // Get the base URL of the site
+              const referralCode = "{{ Auth::user()->username }}"; // Get user's referral code
+              const textToCopy = `${baseUrl}/register?ref=${referralCode}`; // Create affiliate link
+
+
+                // const textToCopy = $(this).data('copy-text'); // Get the text to copy from data attribute
+
+                // Use Clipboard API to copy text
+                navigator.clipboard.writeText(textToCopy).then(function () {
+                    // Show SweetAlert on successful copy
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Copied!',
+                        text: 'Referral link copied to clipboard: ' + textToCopy,
+                        showConfirmButton: true,
+                        timer: 3000, // Auto-close after 3 seconds
+                        timerProgressBar: true
+                    });
+                }).catch(function (error) {
+                    // Show error if copy fails
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Failed to copy text: ' + error,
+                    });
+                });
+            });
+        });
+    </script>
 
 
 <script>

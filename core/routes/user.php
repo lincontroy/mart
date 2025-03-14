@@ -50,6 +50,8 @@ Route::middleware('auth')->name('user.')->group(function () {
             Route::controller('UserController')->group(function () {
                 Route::get('dashboard', 'home')->name('home');
                 Route::get('packages', 'packages')->name('packages');
+                Route::get('jobpostings', 'jobpostings')->name('jobpostings');
+                Route::post('jobpostings/apply/{id}', 'apply')->name('jobpostings.apply');
                 Route::get('withdrawals', 'withdrawals')->name('withdrawals');
                 Route::post('withdrawals/create', 'withdrawalscreate')->name('withdrawalscreate');
                 Route::post('withdrawals/cashback', 'withdrawalscashback')->name('withdrawalscashback');

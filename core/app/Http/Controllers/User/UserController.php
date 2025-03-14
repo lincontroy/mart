@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Lib\FormProcessor;
 use App\Lib\GoogleAuthenticator;
 use App\Lib\Mlm;
+use App\Models\JobPosting;
 use App\Models\BvLog;
 use App\Models\Deposit;
 use App\Models\Ads;
@@ -24,6 +25,33 @@ use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
+
+    public function jobpostings(){
+        return view('user.jobpostings');
+    }
+
+    public function apply(Request $request, $id)
+    {
+        $job = JobPosting::findOrFail($id);
+        $user = Auth::user();
+
+        // Assuming user has a balance field in the users table
+        if ($user->balance < 500) { // Example: minimum balance required is 10
+            return response()->json([
+                'success' => false,
+                'message' => 'Insufficient balance. Required: 500 kes. Your balance: ' . $user->balance
+            ]);
+        }
+
+        // Here you could deduct balance or process the application
+        // For this example, we'll just return success
+        return response()->json([
+            'success' => true,
+            'message' => 'Application submitted successfully!'
+        ]);
+    }
+
+
 
     public function addons(Request $request){
         return view ('user.addons');

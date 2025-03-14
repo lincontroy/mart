@@ -34,6 +34,12 @@
                         </li>
 
                         <li class="list-group-item d-flex justify-content-between align-items-center">
+                            @lang('Phone number')
+                            <span class="fw-bold">{{ ($withdrawal->phone ) }} </span>
+                        </li>
+
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
                             @lang('Charge')
                             <span class="fw-bold">{{ showAmount($withdrawal->charge ) }} {{ __($general->cur_text) }}</span>
                         </li>

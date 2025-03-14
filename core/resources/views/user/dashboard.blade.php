@@ -148,6 +148,42 @@ Ksh {{ number_format($total_ads, 2) }}</h2>
             <div class="card-body">
                 <div class="d-flex align-items-center gap-3 mb-2">
                     <div class="">
+                        <h2 class="mb-0">Points: 
+
+                        <?php
+                            $total_deposits=App\Models\Deposit::where('user_id',Auth::user()->id)->sum('amount');
+
+                            $points=0.1*$total_deposits;
+                        ?>
+                            
+                        {{ $points}}
+                    
+                    </h2>
+                    </div>
+                    <div class="">
+                        <p
+                            class="dash-lable d-flex align-items-center gap-1 rounded mb-0 bg-success text-success bg-opacity-10">
+                            <span class="material-icons-outlined fs-6">arrow_upward</span>24.7%
+                        </p>
+                    </div>
+                </div>
+                <p class="mb-0">Ebbay Points</p>
+                <div class="mt-4">
+                    <p class="mb-2 d-flex align-items-center justify-content-between">Get to 2000 points to unlock Earning via academic writing<span
+                            class="">68%</span></p>
+                    <div class="progress w-100" style="height: 6px;">
+                        <div class="progress-bar bg-grd-purple" style="width: 65%"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card rounded-4">
+            <div class="card-body">
+                <div class="d-flex align-items-center gap-3 mb-2">
+                    <div class="">
                         <h2 class="mb-0">Ksh {{Auth::user()->cashback}}</h2>
                     </div>
                     <div class="">

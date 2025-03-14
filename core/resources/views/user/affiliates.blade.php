@@ -23,47 +23,81 @@
                     </button>
                 </div>
 
-                <!-- Card Body -->
-                <div class="card-body p-3">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-hover">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Username</th>
-                                    <th>Email</th>
-                                    <th>Status</th>
-                                    <th>Package</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $affiliates = App\Models\User::where("ref_by", Auth::user()->id)->get();
-                                ?>
-                                @foreach($affiliates as $aff)
-                                    <tr>
-                                        <td>{{ $aff->id }}</td>
-                                        <td>{{ $aff->username }}</td>
-                                        <td>{{ $aff->email }}</td>
+              <!-- Card Body -->
+<div class="card-body p-3">
+    <!-- Add Search Input -->
+    <div class="mb-3">
+        <input type="text" class="form-control" id="searchInput" placeholder="Search table...">
+    </div>
 
-                                        <?php
-                                        $status = ($aff->plan_id == 0) ? "Not active" : "Active";
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                    <th>Package</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <?php
+                $affiliates = App\Models\User::where("ref_by", Auth::user()->id)->get();
+                ?>
+                @foreach($affiliates as $aff)
+                    <tr>
+                        <td>{{ $aff->id }}</td>
+                        <td>{{ $aff->username }}</td>
+                        <td>{{ $aff->email }}</td>
 
-                                        $plan_name = match ($aff->plan_id) {
-                                            1 => "Basic Package",
-                                            2 => "Premium Package",
-                                            default => "Unknown Package",
-                                        };
-                                        ?>
-                                        
-                                        <td><span class="badge {{ $status == 'Active' ? 'bg-success' : 'bg-warning text-dark' }}">{{ $status }}</span></td>
-                                        <td>{{ $plan_name }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div> <!-- End Table Responsive -->
-                </div> <!-- End Card Body -->
+                        <?php
+                        $status = ($aff->plan_id == 0) ? "Not active" : "Active";
+                        $plan_name = match ($aff->plan_id) {
+                            1 => "Basic Package",
+                            2 => "Premium Package",
+                            default => "Unknown Package",
+                        };
+                        ?>
+                        
+                        <td><span class="badge {{ $status == 'Active' ? 'bg-success' : 'bg-warning text-dark' }}">{{ $status }}</span></td>
+                        <td>{{ $plan_name }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div> <!-- End Table Responsive -->
+</div> <!-- End Card Body -->
+
+<!-- Add JavaScript at the bottom of your page -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    const tableBody = document.getElementById('tableBody');
+    const rows = tableBody.getElementsByTagName('tr');
+
+    searchInput.addEventListener('keyup', function() {
+        const searchTerm = this.value.toLowerCase();
+
+        for (let row of rows) {
+            const cells = row.getElementsByTagName('td');
+            let found = false;
+
+            // Search through all columns
+            for (let cell of cells) {
+                const text = cell.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    found = true;
+                    break;
+                }
+            }
+
+            // Show/hide row based on search result
+            row.style.display = found ? '' : 'none';
+        }
+    });
+});
+</script>
             </div> <!-- End Card -->
         </div> <!-- End Col -->
     </div> <!-- End Row -->
